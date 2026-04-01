@@ -4,874 +4,244 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Porthos Labs</title>
+
   <style>
     :root{
       --bg:#05070A;
-      --panel:#0B0F14;
-      --panel-2:#10161D;
       --text:#F5F7FA;
       --muted:#96A0AE;
       --line:rgba(255,255,255,0.08);
       --blue:#2563EB;
       --blue-2:#60A5FA;
-      --blue-soft:rgba(96,165,250,0.12);
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(37,99,235,0.16), transparent 25%),
-        radial-gradient(circle at 20% 0%, rgba(96,165,250,0.10), transparent 20%),
-        var(--bg);
+      font-family: Inter, Arial, sans-serif;
+      background:var(--bg);
       color:var(--text);
     }
 
-    a{text-decoration:none;color:inherit}
-    img{max-width:100%;display:block}
+    img{display:block;max-width:100%}
+
     .container{max-width:1180px;margin:0 auto;padding:0 24px}
 
+    /* HEADER */
     .header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(5,7,10,0.72);
+      position:sticky;top:0;
+      backdrop-filter:blur(10px);
+      background:rgba(5,7,10,0.8);
       border-bottom:1px solid var(--line);
     }
 
     .header-inner{
       min-height:120px;
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:24px;
-    }
-
-    .logo-wrap{
-      flex-shrink:0;
-      display:flex;
       align-items:center;
     }
 
     .logo-wrap img{
       width:420px;
-      max-width:none;
-      height:auto;
-      display:block;
     }
 
-    .nav{
-      display:flex;
-      align-items:center;
-      gap:24px;
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    .nav a:hover{color:#fff}
-
+    .nav{display:flex;gap:24px;color:var(--muted)}
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:14px 22px;
+      padding:12px 20px;
       border-radius:999px;
-      border:1px solid transparent;
-      cursor:pointer;
-      font-size:14px;
-      transition:.2s ease;
-      white-space:nowrap;
-    }
-
-    .btn-primary{
       background:linear-gradient(135deg,var(--blue),var(--blue-2));
-      color:#fff;
-      box-shadow:0 10px 30px rgba(37,99,235,0.28);
+      color:white;
     }
 
-    .btn-primary:hover{transform:translateY(-1px)}
-
-    .btn-secondary{
-      background:transparent;
-      color:#fff;
-      border-color:var(--line);
-    }
-
-    .btn-secondary:hover{background:rgba(255,255,255,0.04)}
-
-    .hero{
-      padding:96px 0 80px;
-    }
+    /* HERO */
+    .hero{padding:80px 0}
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.02fr .98fr;
-      gap:56px;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
       align-items:center;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      color:#B8C1CC;
-      font-size:11px;
-      font-weight:600;
-      letter-spacing:.18em;
-      text-transform:uppercase;
     }
 
     h1{
-      margin:24px 0 0;
-      font-size:74px;
-      line-height:.96;
-      letter-spacing:-0.05em;
-      max-width:760px;
+      font-size:70px;
+      line-height:1;
+      margin:20px 0;
     }
 
-    .hero p{
-      margin:24px 0 0;
-      color:var(--muted);
-      font-size:21px;
-      line-height:1.75;
-      max-width:760px;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      margin-top:34px;
-    }
-
-    .stats{
-      margin-top:42px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-
-    .stat{
-      background:rgba(255,255,255,0.03);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
-    }
-
-    .stat strong{
-      display:block;
-      font-size:22px;
-      letter-spacing:-0.03em;
-      color:#fff;
-    }
-
-    .stat span{
-      display:block;
-      margin-top:6px;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.5;
-    }
-
-    .preview-wrap{
-      position:relative;
-    }
-
-    .preview-wrap::before{
-      content:"";
-      position:absolute;
-      inset:20px;
-      background:radial-gradient(circle, rgba(37,99,235,0.22), transparent 60%);
-      filter:blur(40px);
-      z-index:0;
-    }
-
+    /* PREVIEW */
     .preview{
-      position:relative;
-      z-index:1;
       border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(16,22,29,0.95), rgba(11,15,20,0.98));
       border-radius:30px;
-      overflow:hidden;
-      box-shadow:0 24px 80px rgba(0,0,0,0.4);
-    }
-
-    .preview-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:18px 20px;
-      border-bottom:1px solid var(--line);
-    }
-
-    .preview-top small{
-      display:block;
-      color:#8F99A6;
-      font-size:11px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
+      padding:20px;
+      background:rgba(255,255,255,0.02);
     }
 
     .preview-title{
-      margin-top:7px;
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:14px;
-      font-weight:600;
-    }
-
-    .sentinel-badge-icon{
-      width:30px;
-      height:30px;
-      border-radius:10px;
-      display:grid;
-      place-items:center;
-      background:rgba(255,255,255,0.04);
-      border:1px solid rgba(96,165,250,0.22);
-      box-shadow:0 0 18px rgba(37,99,235,0.18);
-      overflow:hidden;
-      flex-shrink:0;
-    }
-
-    .sentinel-badge-icon img{
-      width:22px;
-      height:22px;
-      object-fit:contain;
-      display:block;
-      filter: brightness(1.35) saturate(1.2);
-    }
-
-    .pill{
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:600;
-      color:#BBD2FF;
-      background:rgba(37,99,235,0.14);
-      border:1px solid rgba(96,165,250,0.15);
-    }
-
-    .preview-body{padding:20px}
-
-    .metrics{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-    }
-
-    .metric{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      border-radius:18px;
-      padding:16px;
-    }
-
-    .metric small{
-      display:block;
-      color:#8993A1;
-      font-size:11px;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-    }
-
-    .metric strong{
-      display:block;
-      margin-top:9px;
-      font-size:28px;
-      letter-spacing:-0.04em;
-    }
-
-    .metric span{
-      display:block;
-      margin-top:6px;
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .preview-main{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:14px;
-    }
-
-    .card{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.025);
-      border-radius:24px;
-      padding:16px;
-    }
-
-    .card small{
-      color:#8993A1;
-      font-size:11px;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-    }
-
-    .card h3{
-      margin:8px 0 0;
-      font-size:15px;
-      font-weight:600;
-    }
-
-    .system-map{
-      margin-top:14px;
-      min-height:260px;
-      border-radius:20px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.02);
-      padding:18px;
-      display:grid;
-      grid-template-columns:1fr auto 1fr;
-      gap:14px;
-      align-items:center;
-    }
-
-    .stack{
-      display:grid;
       gap:12px;
     }
 
-    .chip{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      border-radius:14px;
-      padding:12px;
-      color:#B0B8C4;
-      font-size:13px;
-      text-align:center;
+    /* SMALL SENTINEL ICON */
+    .sentinel-badge-icon{
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(96,165,250,0.3);
+      box-shadow:0 0 20px rgba(37,99,235,0.2);
     }
 
+    .sentinel-badge-icon img{
+      width:24px;
+      height:24px;
+      filter:brightness(1.4) saturate(1.3);
+    }
+
+    /* SYSTEM MAP */
+    .system-map{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:20px;
+    }
+
+    .chip{
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      text-align:center;
+      color:var(--muted);
+    }
+
+    /* 🔥 MAIN SENTINEL CORE */
     .sentinel-core{
       text-align:center;
-      padding:22px;
-      border-radius:18px;
-      border:1px solid rgba(96,165,250,0.18);
-      background:linear-gradient(180deg, rgba(37,99,235,0.18), rgba(37,99,235,0.08));
-      min-width:140px;
+      padding:40px 20px;
     }
 
     .sentinel-core-icon{
-      width:78px;
-      height:78px;
-      border-radius:20px;
+      width:160px;
+      height:160px;
+      border-radius:30px;
       display:grid;
       place-items:center;
-      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(96,165,250,0.08));
-      border:1px solid rgba(96,165,250,0.22);
-      box-shadow:0 0 30px rgba(37,99,235,0.18);
       margin:0 auto;
-      overflow:hidden;
+
+      background:linear-gradient(
+        180deg,
+        rgba(255,255,255,0.08),
+        rgba(96,165,250,0.15)
+      );
+
+      border:1px solid rgba(96,165,250,0.3);
+
+      box-shadow:
+        0 0 80px rgba(37,99,235,0.35),
+        inset 0 0 30px rgba(96,165,250,0.2);
     }
 
     .sentinel-core-icon img{
-      width:58px;
-      height:58px;
+      width:125px;
+      height:125px;
       object-fit:contain;
-      display:block;
-      filter: brightness(1.35) saturate(1.2);
+
+      filter:
+        brightness(1.5)
+        saturate(1.4)
+        drop-shadow(0 0 20px rgba(37,99,235,0.5));
     }
 
     .sentinel-core span{
       display:block;
-      margin-top:10px;
+      margin-top:14px;
+      font-size:16px;
       color:#D7E6FF;
-      font-size:14px;
       font-weight:600;
     }
 
-    .incident{
-      margin-top:12px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.7;
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr}
+      .logo-wrap img{width:260px}
     }
 
-    .status{
-      margin-top:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      border-radius:14px;
-      padding:12px 14px;
-      color:#C5CFDA;
-      font-size:14px;
-    }
-
-    .status strong{color:#BBD2FF}
-
-    .why{
-      display:grid;
-      gap:12px;
-      margin-top:14px;
-    }
-
-    .why div{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      border-radius:14px;
-      padding:12px 14px;
-      color:#B6BEC9;
-      font-size:13px;
-    }
-
-    .section{
-      padding:92px 0;
-    }
-
-    .section.alt{
-      border-top:1px solid var(--line);
-      background:rgba(255,255,255,0.02);
-    }
-
-    .kicker{
-      color:#8E98A5;
-      font-size:11px;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      font-weight:600;
-    }
-
-    h2{
-      margin:18px 0 0;
-      font-size:54px;
-      line-height:1.02;
-      letter-spacing:-0.045em;
-      max-width:780px;
-    }
-
-    .cards{
-      margin-top:44px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .info{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      border-radius:28px;
-      padding:28px;
-    }
-
-    .icon{
-      width:48px;
-      height:48px;
-      border-radius:16px;
-      display:grid;
-      place-items:center;
-      background:rgba(37,99,235,0.14);
-      color:#BBD2FF;
-      font-size:20px;
-      font-weight:700;
-    }
-
-    .info h3{
-      margin:22px 0 0;
-      font-size:28px;
-      letter-spacing:-0.03em;
-    }
-
-    .info p{
-      margin:14px 0 0;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:15px;
-    }
-
-    .product-grid{
-      display:grid;
-      grid-template-columns:.9fr 1.1fr;
-      gap:44px;
-      align-items:center;
-    }
-
-    .product-copy p{
-      margin:22px 0 0;
-      color:var(--muted);
-      font-size:20px;
-      line-height:1.75;
-      max-width:650px;
-    }
-
-    .cap-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-
-    .cap{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      border-radius:26px;
-      padding:24px;
-    }
-
-    .cap h4{
-      margin:18px 0 0;
-      font-size:23px;
-      letter-spacing:-0.03em;
-    }
-
-    .cap p{
-      margin:12px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.8;
-    }
-
-    .arch{
-      margin-top:44px;
-      border:1px solid var(--line);
-      border-radius:30px;
-      background:rgba(255,255,255,0.03);
-      padding:30px;
-    }
-
-    .arch-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-    }
-
-    .step{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,0.03);
-      border-radius:22px;
-      padding:22px;
-    }
-
-    .step.highlight{
-      border-color:rgba(96,165,250,0.18);
-      background:linear-gradient(180deg, rgba(37,99,235,0.16), rgba(37,99,235,0.08));
-    }
-
-    .step small{
-      color:#9099A5;
-      font-size:11px;
-      letter-spacing:.16em;
-      text-transform:uppercase;
-    }
-
-    .step.highlight small,
-    .step.highlight h4{color:#D6E7FF}
-
-    .step h4{
-      margin:12px 0 0;
-      font-size:23px;
-      letter-spacing:-0.03em;
-    }
-
-    .step p{
-      margin:10px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.75;
-    }
-
-    .cta{
-      border-radius:34px;
-      background:linear-gradient(180deg,#0E1319,#090C10);
-      border:1px solid var(--line);
-      padding:56px 48px;
-      box-shadow:0 30px 80px rgba(0,0,0,0.35);
-    }
-
-    .cta .kicker{color:#9DA8B5}
-    .cta h2{max-width:900px}
-    .cta p{
-      margin:20px 0 0;
-      color:#AAB3BE;
-      font-size:20px;
-      line-height:1.75;
-      max-width:760px;
-    }
-
-    .cta-actions{
-      margin-top:32px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    @media (max-width: 1024px){
-      .hero-grid,
-      .preview-main,
-      .product-grid{grid-template-columns:1fr}
-      .stats,
-      .metrics,
-      .cards,
-      .cap-grid,
-      .arch-grid{grid-template-columns:1fr 1fr}
-      h1{font-size:58px}
-      h2{font-size:42px}
-      .nav{display:none}
-      .header-inner{min-height:100px}
-      .logo-wrap img{width:300px}
-    }
-
-    @media (max-width: 700px){
-      .hero{padding:72px 0 64px}
-      h1{font-size:42px}
-      h2{font-size:34px}
-      .hero p,
-      .product-copy p,
-      .cta p{font-size:18px}
-      .stats,
-      .metrics,
-      .cards,
-      .cap-grid,
-      .arch-grid{grid-template-columns:1fr}
-      .system-map{grid-template-columns:1fr}
-      .cta{padding:40px 28px}
-      .header-inner{min-height:88px}
-      .logo-wrap img{width:220px}
-    }
   </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container header-inner">
-      <div class="logo-wrap">
-        <img src="porthos-logo.png" alt="Porthos Labs">
-      </div>
-      <nav class="nav">
-        <a href="#capabilities">Capabilities</a>
-        <a href="#sentinel">Sentinel</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#" class="btn btn-primary">Get a demo</a>
-      </nav>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo-wrap">
+      <img src="porthos-logo.png" alt="Porthos Labs">
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
+    <nav class="nav">
+      <a>Capabilities</a>
+      <a>Sentinel</a>
+      <a>Architecture</a>
+      <a class="btn">Get a demo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div>
+      <h1>Porthos Labs builds the control layer for data and AI.</h1>
+      <p style="color:#96A0AE">
+        Real-time visibility, governance, and enforcement across data systems and AI.
+      </p>
+    </div>
+
+    <div class="preview">
+
+      <div class="preview-title">
+        <div class="sentinel-badge-icon">
+          <img src="sentinel-logo.png">
+        </div>
+        <span>Sentinel</span>
+      </div>
+
+      <div class="system-map">
+
         <div>
-          <div class="eyebrow">Infrastructure for modern control systems</div>
-          <h1>Porthos Labs builds the control layer for data and AI.</h1>
-          <p>
-            We give organisations real-time visibility, governance, and enforcement across
-            their data systems and AI infrastructure.
-          </p>
-          <div class="hero-actions">
-            <a href="#sentinel" class="btn btn-primary">Explore Sentinel</a>
-            <a href="#architecture" class="btn btn-secondary">View architecture</a>
-          </div>
-
-          <div class="stats">
-            <div class="stat"><strong>Real-time</strong><span>policy enforcement</span></div>
-            <div class="stat"><strong>Unified</strong><span>data + AI governance</span></div>
-            <div class="stat"><strong>Enterprise</strong><span>security posture</span></div>
-            <div class="stat"><strong>Built for</strong><span>regulated environments</span></div>
-          </div>
+          <div class="chip">CRM data</div>
+          <div class="chip">Risk models</div>
+          <div class="chip">Data warehouse</div>
         </div>
 
-        <div class="preview-wrap">
-          <div class="preview">
-            <div class="preview-top">
-              <div>
-                <small>Flagship platform</small>
-                <div class="preview-title">
-                  <div class="sentinel-badge-icon">
-                    <img src="sentinel-logo.png" alt="Sentinel">
-                  </div>
-                  <span>Sentinel</span>
-                </div>
-              </div>
-              <div class="pill">Live governance layer</div>
-            </div>
-
-            <div class="preview-body">
-              <div class="metrics">
-                <div class="metric">
-                  <small>AI activity</small>
-                  <strong>27</strong>
-                  <span>active agents monitored</span>
-                </div>
-                <div class="metric">
-                  <small>Risk alerts</small>
-                  <strong>3</strong>
-                  <span>policy violations blocked</span>
-                </div>
-                <div class="metric">
-                  <small>Compliance</small>
-                  <strong>96%</strong>
-                  <span>control posture score</span>
-                </div>
-              </div>
-
-              <div class="preview-main">
-                <div class="card">
-                  <small>System map</small>
-                  <h3>Unified data and AI surface</h3>
-                  <div class="system-map">
-                    <div class="stack">
-                      <div class="chip">CRM data</div>
-                      <div class="chip">Risk models</div>
-                      <div class="chip">Data warehouse</div>
-                    </div>
-
-                    <div class="sentinel-core">
-                      <div class="sentinel-core-icon">
-                        <img src="sentinel-logo.png" alt="Sentinel">
-                      </div>
-                      <span>Sentinel</span>
-                    </div>
-
-                    <div class="stack">
-                      <div class="chip">AI copilots</div>
-                      <div class="chip">Internal apps</div>
-                      <div class="chip">External APIs</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="card">
-                    <small>Latest incident</small>
-                    <h3>External pricing request blocked</h3>
-                    <div class="incident">
-                      Sentinel intercepted an unauthorised market data request
-                      from a trading workflow and enforced policy automatically.
-                    </div>
-                    <div class="status">Status: <strong>Resolved by policy</strong></div>
-                  </div>
-
-                  <div class="card" style="margin-top:14px">
-                    <small>Why Sentinel</small>
-                    <div class="why">
-                      <div>Real-time governance across data and AI systems</div>
-                      <div>Unified oversight for regulated environments</div>
-                      <div>Control before incidents become liabilities</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <!-- 🔥 BIG SENTINEL -->
+        <div class="sentinel-core">
+          <div class="sentinel-core-icon">
+            <img src="sentinel-logo.png">
           </div>
+          <span>Sentinel</span>
         </div>
+
+        <div>
+          <div class="chip">AI copilots</div>
+          <div class="chip">Internal apps</div>
+          <div class="chip">External APIs</div>
+        </div>
+
       </div>
-    </section>
 
-    <section class="section alt" id="capabilities">
-      <div class="container">
-        <div class="kicker">Core capabilities</div>
-        <h2>Infrastructure that sees, governs, and enforces.</h2>
+    </div>
 
-        <div class="cards">
-          <div class="info">
-            <div class="icon">◉</div>
-            <h3>Visibility</h3>
-            <p>Understand how data and AI systems move across your organisation in real time.</p>
-          </div>
-          <div class="info">
-            <div class="icon">◌</div>
-            <h3>Governance</h3>
-            <p>Apply policy, permissions, and access controls before risk becomes exposure.</p>
-          </div>
-          <div class="info">
-            <div class="icon">✦</div>
-            <h3>Enforcement</h3>
-            <p>Move beyond monitoring with infrastructure that can intervene instantly.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+  </div>
+</section>
 
-    <section class="section" id="sentinel">
-      <div class="container product-grid">
-        <div class="product-copy">
-          <div class="kicker">Product</div>
-          <h2>Sentinel</h2>
-          <p>
-            Sentinel is a real-time governance platform that sits between your systems and execution —
-            ensuring every action is visible, compliant, and controlled.
-          </p>
-          <div class="hero-actions">
-            <a href="#" class="btn btn-primary">View product</a>
-            <a href="#" class="btn btn-secondary">Book a walkthrough</a>
-          </div>
-        </div>
+</main>
 
-        <div class="cap-grid">
-          <div class="cap">
-            <div class="icon">◉</div>
-            <h4>Data governance</h4>
-            <p>Classify, secure, and control sensitive information across enterprise systems.</p>
-          </div>
-          <div class="cap">
-            <div class="icon">◌</div>
-            <h4>AI governance</h4>
-            <p>Monitor agents, models, and workflows with policy-aware oversight.</p>
-          </div>
-          <div class="cap">
-            <div class="icon">✦</div>
-            <h4>Unified control layer</h4>
-            <p>Connect data, AI, and operational systems through one enforceable architecture.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt" id="architecture">
-      <div class="container">
-        <div class="kicker">Architecture</div>
-        <h2>The control layer sits between data, systems, and action.</h2>
-        <p style="margin-top:20px;color:#96A0AE;font-size:20px;line-height:1.75;max-width:860px;">
-          Porthos Labs is building infrastructure for organisations that need more than visibility.
-          The next generation of systems must be governable by design.
-        </p>
-
-        <div class="arch">
-          <div class="arch-grid">
-            <div class="step">
-              <small>Step 01</small>
-              <h4>Data sources</h4>
-              <p>Warehouses, documents, records, operational systems.</p>
-            </div>
-            <div class="step highlight">
-              <small>Step 02</small>
-              <h4>Sentinel</h4>
-              <p>Monitoring, policy, access control, and real-time intervention.</p>
-            </div>
-            <div class="step">
-              <small>Step 03</small>
-              <h4>AI + systems</h4>
-              <p>Agents, copilots, internal tools, workflows, external services.</p>
-            </div>
-            <div class="step">
-              <small>Step 04</small>
-              <h4>Enforced action</h4>
-              <p>Approved, blocked, escalated, and logged with full traceability.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="cta">
-          <div class="kicker">Porthos Labs</div>
-          <h2>Infrastructure for the next generation of intelligent systems.</h2>
-          <p>
-            Start with Sentinel. Build on top of a governance layer designed for real operational control.
-          </p>
-          <div class="cta-actions">
-            <a href="#sentinel" class="btn btn-primary">Explore Sentinel</a>
-            <a href="#" class="btn btn-secondary">Talk to us</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
 </body>
 </html>
