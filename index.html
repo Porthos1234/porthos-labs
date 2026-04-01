@@ -14,6 +14,7 @@
       --line:rgba(255,255,255,0.08);
       --blue:#2563EB;
       --blue-2:#60A5FA;
+      --blue-soft:rgba(96,165,250,0.12);
     }
 
     *{box-sizing:border-box}
@@ -33,14 +34,16 @@
     .container{max-width:1180px;margin:0 auto;padding:0 24px}
 
     .header{
-      position:sticky;top:0;z-index:50;
+      position:sticky;
+      top:0;
+      z-index:50;
       backdrop-filter: blur(10px);
       background: rgba(5,7,10,0.72);
       border-bottom:1px solid var(--line);
     }
 
     .header-inner{
-      min-height:84px;
+      min-height:120px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -54,7 +57,7 @@
     }
 
     .logo-wrap img{
-      width:260px;
+      width:420px;
       max-width:none;
       height:auto;
       display:block;
@@ -81,6 +84,7 @@
       cursor:pointer;
       font-size:14px;
       transition:.2s ease;
+      white-space:nowrap;
     }
 
     .btn-primary{
@@ -223,10 +227,23 @@
       font-weight:600;
     }
 
-    .preview-title img{
-      width:20px;
-      height:20px;
+    .sentinel-badge-icon{
+      width:24px;
+      height:24px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      background:var(--blue-soft);
+      border:1px solid rgba(96,165,250,0.16);
+      overflow:hidden;
+      flex-shrink:0;
+    }
+
+    .sentinel-badge-icon img{
+      width:18px;
+      height:18px;
       object-fit:contain;
+      display:block;
     }
 
     .pill{
@@ -337,13 +354,26 @@
       border-radius:18px;
       border:1px solid rgba(96,165,250,0.18);
       background:linear-gradient(180deg, rgba(37,99,235,0.18), rgba(37,99,235,0.08));
+      min-width:140px;
     }
 
-    .sentinel-core img{
-      width:58px;
-      height:58px;
-      object-fit:contain;
+    .sentinel-core-icon{
+      width:72px;
+      height:72px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
       margin:0 auto;
+      overflow:hidden;
+    }
+
+    .sentinel-core-icon img{
+      width:52px;
+      height:52px;
+      object-fit:contain;
+      display:block;
     }
 
     .sentinel-core span{
@@ -435,6 +465,7 @@
       place-items:center;
       background:rgba(37,99,235,0.14);
       color:#BBD2FF;
+      font-size:20px;
       font-weight:700;
     }
 
@@ -578,7 +609,8 @@
       h1{font-size:58px}
       h2{font-size:42px}
       .nav{display:none}
-      .logo-wrap img{width:220px}
+      .header-inner{min-height:100px}
+      .logo-wrap img{width:300px}
     }
 
     @media (max-width: 700px){
@@ -595,7 +627,8 @@
       .arch-grid{grid-template-columns:1fr}
       .system-map{grid-template-columns:1fr}
       .cta{padding:40px 28px}
-      .logo-wrap img{width:180px}
+      .header-inner{min-height:88px}
+      .logo-wrap img{width:220px}
     }
   </style>
 </head>
@@ -643,7 +676,9 @@
               <div>
                 <small>Flagship platform</small>
                 <div class="preview-title">
-                  <img src="./sentinel-logo.png" alt="Sentinel" />
+                  <div class="sentinel-badge-icon">
+                    <img src="sentinel-logo.png" alt="Sentinel">
+                  </div>
                   <span>Sentinel</span>
                 </div>
               </div>
@@ -681,7 +716,9 @@
                     </div>
 
                     <div class="sentinel-core">
-                      <img src="./sentinel-logo.png" alt="Sentinel" />
+                      <div class="sentinel-core-icon">
+                        <img src="sentinel-logo.png" alt="Sentinel">
+                      </div>
                       <span>Sentinel</span>
                     </div>
 
@@ -714,7 +751,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -728,17 +764,17 @@
 
         <div class="cards">
           <div class="info">
-            <div class="icon">•</div>
+            <div class="icon">◉</div>
             <h3>Visibility</h3>
             <p>Understand how data and AI systems move across your organisation in real time.</p>
           </div>
           <div class="info">
-            <div class="icon">•</div>
+            <div class="icon">◌</div>
             <h3>Governance</h3>
             <p>Apply policy, permissions, and access controls before risk becomes exposure.</p>
           </div>
           <div class="info">
-            <div class="icon">•</div>
+            <div class="icon">✦</div>
             <h3>Enforcement</h3>
             <p>Move beyond monitoring with infrastructure that can intervene instantly.</p>
           </div>
@@ -763,17 +799,17 @@
 
         <div class="cap-grid">
           <div class="cap">
-            <div class="icon">•</div>
+            <div class="icon">◉</div>
             <h4>Data governance</h4>
             <p>Classify, secure, and control sensitive information across enterprise systems.</p>
           </div>
           <div class="cap">
-            <div class="icon">•</div>
+            <div class="icon">◌</div>
             <h4>AI governance</h4>
             <p>Monitor agents, models, and workflows with policy-aware oversight.</p>
           </div>
           <div class="cap">
-            <div class="icon">•</div>
+            <div class="icon">✦</div>
             <h4>Unified control layer</h4>
             <p>Connect data, AI, and operational systems through one enforceable architecture.</p>
           </div>
