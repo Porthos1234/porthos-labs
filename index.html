@@ -1,134 +1,177 @@
-export default function SentinelGodMode() {
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden font-sans">
-      <style>{`
-        @keyframes pulseGlow {
-          0%, 100% { transform: scale(1); opacity: 0.55; }
-          50% { transform: scale(1.18); opacity: 0.95; }
-        }
-        @keyframes spinSlow {
-          from { transform: translate(-50%, -50%) rotate(0deg); }
-          to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        @keyframes spinReverse {
-          from { transform: translate(-50%, -50%) rotate(360deg); }
-          to { transform: translate(-50%, -50%) rotate(0deg); }
-        }
-        @keyframes blinkThreat {
-          0%, 100% { opacity: 0; }
-          15%, 35% { opacity: 0.65; }
-          50%, 100% { opacity: 0; }
-        }
-        @keyframes corePulse {
-          0%, 100% { transform: translate(-50%, -50%) scale(1); }
-          50% { transform: translate(-50%, -50%) scale(1.08); }
-        }
-        @keyframes linePulse {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 1; }
-        }
-        @keyframes fadeBoot {
-          0% { opacity: 1; }
-          70% { opacity: 1; }
-          100% { opacity: 0; visibility: hidden; }
-        }
-      `}</style>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Porthos Labs</title>
 
-      <div
-        style={{ animation: 'fadeBoot 2.2s ease forwards' }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black text-sm tracking-[0.35em] text-white/70"
-      >
-        INITIALIZING SENTINEL
-      </div>
-
-      <header className="border-b border-white/10 px-8 py-6">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <img src="/porthos-logo.png" alt="Porthos Labs" className="h-10 w-auto object-contain" />
-          <div className="hidden gap-6 text-sm text-white/55 md:flex">
-            <span>Sentinel</span>
-            <span>Platform</span>
-            <span>Access</span>
-          </div>
-        </div>
-      </header>
-
-      <section className="mx-auto max-w-6xl px-8 pt-20 text-center">
-        <div className="text-xs uppercase tracking-[0.28em] text-white/40">Porthos Labs</div>
-        <h1 className="mt-5 text-6xl font-semibold leading-[0.9] tracking-[-0.06em] md:text-8xl">
-          Control Reality.
-        </h1>
-        <p className="mx-auto mt-6 max-w-xl text-lg text-white/55 md:text-xl">
-          AI doesn’t run. You do.
-        </p>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-24 pt-10 md:px-8">
-        <div className="relative mx-auto h-[720px] max-w-[760px]">
-          <div
-            style={{ animation: 'pulseGlow 4s ease-in-out infinite' }}
-            className="absolute left-1/2 top-1/2 h-[340px] w-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/30 blur-[140px]"
-          />
-
-          <div
-            style={{ animation: 'blinkThreat 7s ease-in-out infinite' }}
-            className="absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500/25 blur-[130px]"
-          />
-
-          <div
-            style={{ animation: 'spinSlow 20s linear infinite' }}
-            className="absolute left-1/2 top-1/2 h-[360px] w-[360px] rounded-full border border-white/10"
-          />
-          <div
-            style={{ animation: 'spinReverse 14s linear infinite' }}
-            className="absolute left-1/2 top-1/2 h-[470px] w-[470px] rounded-full border border-blue-400/15"
-          />
-          <div
-            style={{ animation: 'spinSlow 11s linear infinite' }}
-            className="absolute left-1/2 top-1/2 h-[580px] w-[580px] rounded-full border border-white/5"
-          />
-
-          <div style={{ animation: 'linePulse 2s ease-in-out infinite' }} className="absolute left-1/2 top-1/2 h-[2px] w-[250px] -translate-y-1/2 bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0" />
-          <div style={{ animation: 'linePulse 2.4s ease-in-out infinite' }} className="absolute left-1/2 top-1/2 h-[250px] w-[2px] -translate-x-1/2 bg-gradient-to-b from-blue-400/0 via-blue-400 to-blue-400/0" />
-          <div style={{ animation: 'linePulse 2.8s ease-in-out infinite', transform: 'translate(-50%, -50%) rotate(45deg)' }} className="absolute left-1/2 top-1/2 h-[2px] w-[250px] bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0" />
-          <div style={{ animation: 'linePulse 3.1s ease-in-out infinite', transform: 'translate(-50%, -50%) rotate(-45deg)' }} className="absolute left-1/2 top-1/2 h-[2px] w-[250px] bg-gradient-to-r from-blue-400/0 via-blue-400 to-blue-400/0" />
-
-          <div className="absolute left-1/2 top-[12%] -translate-x-1/2 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-xs text-white/80 backdrop-blur-xl">AI</div>
-          <div className="absolute right-[8%] top-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-xs text-white/80 backdrop-blur-xl">API</div>
-          <div className="absolute bottom-[12%] left-1/2 -translate-x-1/2 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-xs text-white/80 backdrop-blur-xl">DATA</div>
-          <div className="absolute left-[8%] top-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-white/8 px-4 py-3 text-xs text-white/80 backdrop-blur-xl">FLOW</div>
-
-          <div
-            style={{ animation: 'corePulse 2.4s ease-in-out infinite' }}
-            className="absolute left-1/2 top-1/2 h-[220px] w-[220px] rounded-[42px] border border-blue-400/20 bg-gradient-to-b from-white/10 to-blue-500/10 shadow-[0_0_90px_rgba(37,99,235,0.35)]"
-          >
-            <div className="flex h-full w-full items-center justify-center">
-              <img src="/sentinel-logo.png" alt="Sentinel" className="h-40 w-40 object-contain brightness-125 saturate-150" />
-            </div>
-          </div>
-
-          <div className="absolute bottom-0 left-1/2 w-full max-w-4xl -translate-x-1/2">
-            <div className="mb-5 flex items-center justify-center gap-2">
-              <button className="rounded-xl bg-white px-4 py-2 text-sm text-black">overview</button>
-              <button className="rounded-xl border border-white/10 px-4 py-2 text-sm text-white/60">activity</button>
-              <button className="rounded-xl border border-white/10 px-4 py-2 text-sm text-white/60">policy</button>
-            </div>
-            <div className="grid gap-4 md:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-xl">
-                <div className="text-3xl font-semibold tracking-[-0.05em]">27</div>
-                <div className="mt-2 text-sm text-white/55">Live agents</div>
-              </div>
-              <div className="rounded-2xl border border-red-400/20 bg-red-500/10 p-6 text-center backdrop-blur-xl">
-                <div className="text-3xl font-semibold tracking-[-0.05em] text-red-300">18</div>
-                <div className="mt-2 text-sm text-white/55">Blocked threats</div>
-              </div>
-              <div className="rounded-2xl border border-blue-400/20 bg-blue-500/10 p-6 text-center backdrop-blur-xl">
-                <div className="text-3xl font-semibold tracking-[-0.05em] text-blue-200">96%</div>
-                <div className="mt-2 text-sm text-white/55">Safe state</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+<style>
+body {
+  margin:0;
+  background:black;
+  color:white;
+  font-family:Arial;
+  overflow:hidden;
 }
+
+/* BOOT */
+#boot {
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  letter-spacing:4px;
+  animation:fadeOut 2.5s forwards;
+}
+
+@keyframes fadeOut {
+  0% {opacity:1;}
+  80% {opacity:1;}
+  100% {opacity:0; visibility:hidden;}
+}
+
+/* CORE */
+.core {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:600px;
+  height:600px;
+}
+
+/* glow */
+.glow {
+  position:absolute;
+  inset:0;
+  background:rgba(37,99,235,0.3);
+  filter:blur(150px);
+  border-radius:50%;
+  animation:pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+}
+
+/* rings */
+.ring {
+  position:absolute;
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:50%;
+  inset:0;
+  animation:spin linear infinite;
+}
+
+.r1 {animation-duration:20s;}
+.r2 {animation-duration:14s; transform:scale(1.2);}
+.r3 {animation-duration:10s; transform:scale(1.4);}
+
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+/* lines */
+.line {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:250px;
+  height:2px;
+  background:linear-gradient(to right,transparent, #3b82f6, transparent);
+  animation:blink 2s infinite;
+}
+
+@keyframes blink {
+  0%,100%{opacity:0.2;}
+  50%{opacity:1;}
+}
+
+/* center */
+.center {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  animation:corePulse 2s infinite;
+}
+
+@keyframes corePulse {
+  0%,100%{transform:translate(-50%,-50%) scale(1);}
+  50%{transform:translate(-50%,-50%) scale(1.1);}
+}
+
+.center img {
+  width:180px;
+}
+
+/* nodes */
+.node {
+  position:absolute;
+  padding:6px 10px;
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:10px;
+  font-size:12px;
+}
+
+.ai {top:10%; left:50%; transform:translateX(-50%);}
+.api {right:10%; top:50%; transform:translateY(-50%);}
+.data {bottom:10%; left:50%; transform:translateX(-50%);}
+.flow {left:10%; top:50%; transform:translateY(-50%);}
+
+/* stats */
+.stats {
+  position:absolute;
+  bottom:40px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.card {
+  border:1px solid rgba(255,255,255,0.1);
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<div id="boot">INITIALIZING SENTINEL</div>
+
+<div class="core">
+
+  <div class="glow"></div>
+
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="ring r3"></div>
+
+  <div class="line"></div>
+  <div class="line" style="transform:rotate(90deg)"></div>
+
+  <div class="center">
+    <img src="sentinel-logo.png">
+  </div>
+
+  <div class="node ai">AI</div>
+  <div class="node api">API</div>
+  <div class="node data">DATA</div>
+  <div class="node flow">FLOW</div>
+
+</div>
+
+<div class="stats">
+  <div class="card">27 Agents</div>
+  <div class="card">18 Blocked</div>
+  <div class="card">96% Safe</div>
+</div>
+
+</body>
+</html>
