@@ -6,15 +6,15 @@
   <title>Porthos Labs</title>
   <style>
     :root{
-      --bg:#e9e5db;
-      --bg-2:#e3dfd4;
-      --panel:#ddd7ca;
-      --text:#111111;
-      --muted:#5e5a52;
-      --line:rgba(17,17,17,0.14);
+      --bg:#ffffff;
+      --bg-2:#f6f7f9;
+      --panel:#f4f5f7;
+      --text:#0b0b0c;
+      --muted:#6b7280;
+      --line:rgba(11,11,12,0.10);
       --blue:#2563eb;
       --blue-dark:#173a86;
-      --black:#111111;
+      --black:#0b0b0c;
       --white:#ffffff;
     }
 
@@ -44,7 +44,7 @@
       position:sticky;
       top:0;
       z-index:50;
-      background:rgba(233,229,219,0.92);
+      background:rgba(255,255,255,0.92);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
     }
@@ -64,7 +64,7 @@
     }
 
     .logo-wrap img{
-      width:280px;
+      width:300px;
       height:auto;
       display:block;
     }
@@ -106,11 +106,11 @@
     }
 
     .btn-light:hover{
-      background:rgba(17,17,17,0.03);
+      background:rgba(11,11,12,0.03);
     }
 
     .hero{
-      padding:56px 0 48px;
+      padding:64px 0 56px;
       border-bottom:1px solid var(--line);
     }
 
@@ -149,6 +149,14 @@
       font-size:28px;
       line-height:1.38;
       color:#1e1e1e;
+    }
+
+    .hero-support{
+      margin-top:32px;
+      max-width:620px;
+      font-size:20px;
+      line-height:1.55;
+      color:var(--muted);
     }
 
     .hero-actions{
@@ -218,7 +226,7 @@
     .view-row span{
       justify-self:end;
       font-size:16px;
-      color:#6a665d;
+      color:var(--muted);
       text-align:right;
     }
 
@@ -297,7 +305,7 @@
       color:white;
       border-radius:28px;
       padding:28px;
-      min-height:540px;
+      min-height:580px;
       position:relative;
       overflow:hidden;
       box-shadow:0 10px 30px rgba(0,0,0,0.08);
@@ -341,21 +349,23 @@
     }
 
     .sentinel-icon-sm{
-      width:32px;
-      height:32px;
-      border-radius:10px;
+      width:42px;
+      height:42px;
+      border-radius:12px;
       display:grid;
       place-items:center;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(96,165,250,0.16);
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(96,165,250,0.20);
       overflow:hidden;
+      flex-shrink:0;
+      box-shadow:0 0 22px rgba(37,99,235,0.18);
     }
 
     .sentinel-icon-sm img{
-      width:22px;
-      height:22px;
+      width:30px;
+      height:30px;
       object-fit:contain;
-      filter:brightness(1.35) saturate(1.25);
+      filter:brightness(1.45) saturate(1.35);
     }
 
     .product-core{
@@ -368,24 +378,24 @@
     }
 
     .sentinel-core{
-      width:220px;
-      height:220px;
-      border-radius:38px;
+      width:240px;
+      height:240px;
+      border-radius:42px;
       display:grid;
       place-items:center;
       background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(96,165,250,0.16));
       border:1px solid rgba(96,165,250,0.28);
       box-shadow:
-        0 0 100px rgba(37,99,235,0.24),
+        0 0 110px rgba(37,99,235,0.26),
         inset 0 0 40px rgba(96,165,250,0.10);
       overflow:hidden;
     }
 
     .sentinel-core img{
-      width:160px;
-      height:160px;
+      width:180px;
+      height:180px;
       object-fit:contain;
-      filter:brightness(1.45) saturate(1.35);
+      filter:brightness(1.55) saturate(1.4);
     }
 
     .product-core h3{
@@ -462,7 +472,7 @@
     }
 
     .release-card{
-      background:#ded5c7;
+      background:#f4f5f7;
       border-radius:28px;
       padding:32px;
       min-height:420px;
@@ -804,6 +814,10 @@
           <div class="hero-sub serif">
             Building the control layer for organisations that need visibility,
             policy, and enforcement across intelligent systems.
+          </div>
+          <div class="hero-support">
+            Used by organisations that require accountability, control, and trust
+            across modern operational systems.
           </div>
 
           <div class="hero-actions">
