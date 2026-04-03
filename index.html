@@ -137,10 +137,10 @@
 
     .hero-sub{
       margin-top:24px;
-      max-width:700px;
-      font-size:24px;
-      line-height:1.45;
-      color:#D5DEE8;
+      max-width:640px;
+      font-size:22px;
+      line-height:1.5;
+      color:#C9D4DF;
     }
 
     .hero-actions{
@@ -652,56 +652,137 @@
       align-items:center;
     }
 
-    .motion-panel{
+    .city-panel{
       position:relative;
-      min-height:520px;
+      min-height:560px;
       border-radius:34px;
-      background:linear-gradient(180deg,#09111B,#05070A);
+      overflow:hidden;
       border:1px solid rgba(255,255,255,0.06);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        linear-gradient(180deg,#07101A,#04070C);
+      box-shadow:0 24px 70px rgba(0,0,0,0.22);
+    }
+
+    .city-glow{
+      position:absolute;
+      width:420px;
+      height:420px;
+      left:50%;
+      top:45%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      background:rgba(37,99,235,0.18);
+      filter:blur(140px);
+      animation:pulseGlow 6s ease-in-out infinite;
+    }
+
+    .city-grid{
+      position:absolute;
+      inset:0;
+      background:
+        repeating-linear-gradient(to right, transparent 0 38px, rgba(255,255,255,0.04) 38px 39px),
+        repeating-linear-gradient(to bottom, transparent 0 38px, rgba(255,255,255,0.035) 38px 39px);
+      opacity:.55;
+    }
+
+    .city-buildings{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:66%;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      padding:0 34px 26px;
+      gap:14px;
+    }
+
+    .tower{
+      flex:1;
+      border-radius:14px 14px 0 0;
+      position:relative;
+      background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02);
       overflow:hidden;
     }
 
-    .motion-panel::before{
+    .tower::before{
       content:"";
       position:absolute;
-      width:320px;
-      height:320px;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      background:rgba(37,99,235,0.20);
-      border-radius:50%;
-      filter:blur(120px);
-      animation:pulseGlow 5s ease-in-out infinite;
+      inset:0;
+      background:
+        repeating-linear-gradient(to right, transparent 0 16px, rgba(96,165,250,0.08) 16px 17px),
+        repeating-linear-gradient(to bottom, transparent 0 16px, rgba(255,255,255,0.035) 16px 17px);
+      opacity:.65;
     }
 
-    .motion-ring{
+    .t1{height:42%}
+    .t2{height:58%}
+    .t3{height:76%}
+    .t4{height:92%}
+    .t5{height:68%}
+    .t6{height:82%}
+    .t7{height:50%}
+
+    .city-line{
       position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,0.07);
+      height:2px;
+      background:linear-gradient(to right, transparent, #3b82f6, transparent);
+      opacity:.9;
+      filter:drop-shadow(0 0 10px rgba(59,130,246,0.45));
+      animation:linePulse 2.4s ease-in-out infinite;
     }
 
-    .mr1{width:180px;height:180px;animation:spin 14s linear infinite;}
-    .mr2{width:280px;height:280px;border-color:rgba(96,165,250,0.16);animation:spinReverse 10s linear infinite;}
-    .mr3{width:390px;height:390px;border-color:rgba(255,255,255,0.05);animation:spin 7s linear infinite;}
+    .city-line-1{
+      width:52%;
+      left:16%;
+      top:35%;
+      transform:rotate(-18deg);
+    }
 
-    .governance-tag{
+    .city-line-2{
+      width:46%;
+      left:30%;
+      top:53%;
+      transform:rotate(10deg);
+      animation-delay:.4s;
+    }
+
+    .city-line-3{
+      width:36%;
+      left:40%;
+      top:23%;
+      transform:rotate(28deg);
+      animation-delay:.8s;
+    }
+
+    .city-scan{
       position:absolute;
-      top:24%;
-      left:50%;
-      transform:translateX(-50%);
-      padding:8px 12px;
-      border-radius:10px;
-      background:rgba(212,167,79,0.95);
-      color:#111;
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:.08em;
+      left:0;
+      right:0;
+      top:0;
+      height:90px;
+      background:linear-gradient(to bottom, rgba(96,165,250,0.08), transparent);
+      animation:scanMove 6s linear infinite;
+      pointer-events:none;
+    }
+
+    .city-tag{
+      position:absolute;
+      left:30px;
+      top:28px;
+      padding:10px 14px;
+      border-radius:12px;
+      font-size:12px;
+      letter-spacing:.16em;
       text-transform:uppercase;
-      z-index:2;
+      color:#dbeafe;
+      background:rgba(37,99,235,0.14);
+      border:1px solid rgba(96,165,250,0.18);
+      backdrop-filter:blur(8px);
     }
 
     .quote h2{
@@ -869,19 +950,24 @@
       100%{transform:translate(-50%,-50%) rotate(-360deg) translateX(170px) rotate(360deg)}
     }
 
+    @keyframes scanMove{
+      0%{transform:translateY(-120px);opacity:0}
+      10%{opacity:1}
+      50%{opacity:.85}
+      100%{transform:translateY(620px);opacity:0}
+    }
+
     @media (max-width: 1100px){
       h1{font-size:64px}
       h2{font-size:48px}
       .hero-grid,
       .split,
-      .vision-grid,
       .sentinel-grid,
       .principles-grid,
       .footer-top{
         grid-template-columns:1fr;
       }
       .vision-grid{
-        display:grid;
         grid-template-columns:repeat(2,1fr);
       }
       .hero-system{min-height:740px}
@@ -951,8 +1037,8 @@
         <div>
           <div class="eyebrow">Porthos Labs</div>
           <h1>Designing tomorrow’s future, today.</h1>
-          <div class="hero-sub serif">
-            We build intelligent products, AI infrastructure, and future-facing systems for the next era of technology.
+          <div class="hero-sub">
+            We build intelligent products, AI infrastructure, and future systems for the next era of technology.
           </div>
 
           <div class="hero-actions">
@@ -1095,7 +1181,7 @@
           <div class="eyebrow">Flagship product</div>
           <h2>Sentinel</h2>
           <p>
-            Sentinel is our live control layer for data systems, AI workflows, and operational environments. It is the first expression of the Porthos Labs vision.
+            Sentinel is the live control layer for data systems, AI workflows, and operational environments. It is the first expression of the Porthos Labs vision.
           </p>
           <div class="sentinel-cta">
             <a href="sentinel.html" class="btn btn-primary">Launch Sentinel</a>
@@ -1144,21 +1230,33 @@
 
     <section class="section principles">
       <div class="container principles-grid">
-        <div class="motion-panel">
-          <div class="motion-ring mr1"></div>
-          <div class="motion-ring mr2"></div>
-          <div class="motion-ring mr3"></div>
-          <div class="governance-tag">Future systems</div>
-          <div class="signal s1"></div>
-          <div class="signal s2"></div>
-          <div class="signal s3"></div>
+        <div class="city-panel">
+          <div class="city-glow"></div>
+          <div class="city-grid"></div>
+
+          <div class="city-line city-line-1"></div>
+          <div class="city-line city-line-2"></div>
+          <div class="city-line city-line-3"></div>
+
+          <div class="city-buildings">
+            <div class="tower t1"></div>
+            <div class="tower t2"></div>
+            <div class="tower t3"></div>
+            <div class="tower t4"></div>
+            <div class="tower t5"></div>
+            <div class="tower t6"></div>
+            <div class="tower t7"></div>
+          </div>
+
+          <div class="city-scan"></div>
+          <div class="city-tag">Future Systems</div>
         </div>
 
         <div class="quote">
           <div class="eyebrow">Foundational view</div>
-          <h2 class="serif">The future belongs to companies that don’t just use intelligence — they design its environment.</h2>
+          <h2>The future belongs to companies that don’t just use intelligence — they design its environment.</h2>
           <p>
-            Porthos Labs is building the systems, products, and structures that intelligent technology will live inside.
+            Porthos Labs creates products, infrastructure, and future-facing systems for the next era of software, AI, and machine-led operations.
           </p>
         </div>
       </div>
@@ -1178,7 +1276,7 @@
           <div class="release-card">
             <div>
               <h3>Sentinel / Control Layer</h3>
-              <p class="serif">A product surface for monitoring and enforcing action across data and AI systems.</p>
+              <p>A product surface for monitoring and enforcing action across data and AI systems.</p>
             </div>
             <div class="release-meta">
               <div class="release-meta-row"><strong>Date</strong><span>April 2026</span></div>
@@ -1189,7 +1287,7 @@
           <div class="release-card">
             <div>
               <h3>Governance by design</h3>
-              <p class="serif">Why next-generation systems need policy, visibility, and enforceability built into the architecture.</p>
+              <p>Why next-generation systems need policy, visibility, and enforceability built into the architecture.</p>
             </div>
             <div class="release-meta">
               <div class="release-meta-row"><strong>Date</strong><span>April 2026</span></div>
@@ -1200,7 +1298,7 @@
           <div class="release-card">
             <div>
               <h3>Future systems thesis</h3>
-              <p class="serif">A broader view on products, ventures, and the next era of intelligent infrastructure.</p>
+              <p>A broader view on products, ventures, and the next era of intelligent infrastructure.</p>
             </div>
             <div class="release-meta">
               <div class="release-meta-row"><strong>Date</strong><span>April 2026</span></div>
