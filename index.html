@@ -1,1 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Porthos Labs</title>
+  <style>
+    :root{
+      --bg:#05070A;
+      --panel:#0B0F14;
+      --panel-2:#10161D;
+      --text:#F5F7FA;
+      --muted:#94A3B8;
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(255,255,255,0.12);
+      --blue:#2563EB;
+      --blue-2:#60A5FA;
+      --gold:#D4A74F;
+      --shadow:0 24px 70px rgba(0,0,0,0.24);
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 82% 8%, rgba(37,99,235,0.13), transparent 22%),
+        radial-gradient(circle at 18% 0%, rgba(96,165,250,0.06), transparent 18%),
+        linear-gradient(180deg,#06080C 0%,#05070A 100%);
+      overflow-x:hidden;
+    }
+
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      max-width:1280px;
+      margin:0 auto;
+      padding:0 28px;
+      position:relative;
+      z-index:2;
+    }
+
+    .header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,7,10,0.78);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .header-inner{
+      min-height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo-wrap img{
+      width:255px;
+      height:auto;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:26px;
+      font-size:15px;
+      color:var(--muted);
+    }
+
+    .nav a:hover{color:var(--text)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 22px;
+      border-radius:14px;
+      border:1px solid transparent;
+      font-size:15px;
+      transition:.22s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:#fff;
+      color:#000;
+      box-shadow:0 10px 28px rgba(255,255,255,0.08);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 34px rgba(255,255,255,0.12);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.04);
+      border-color:var(--line-strong);
+      transform:translateY(-2px);
+    }
+
+    .hero{
+      position:relative;
+      padding:74px 0 52px;
+      border-bottom:1px solid var(--line);
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      gap:48px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+
+    h1{
+      margin:0;
+      font-size:82px;
+      line-height:.9;
+      letter-spacing:-0.06em;
+      font-weight:700;
+      max-width:860px;
+    }
+
+    .hero-sub{
+      margin-top:22px;
+      max-width:620px;
+      font-size:21px;
+      line-height:1.52;
+      color:#CAD4DE;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:30px;
+    }
+
+    .hero-meta{
+      margin-top:42px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .meta-item small{
+      display:block;
+      margin-bottom:8px;
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .meta-item div{
+      font-size:16px;
+      line-height:1.45;
+      color:#D9E1E8;
+    }
+
+    .hero-system{
+      position:relative;
+      min-height:720px;
+      border-radius:36px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        linear-gradient(180deg,#09111B,#05070A);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-system::before{
+      content:"";
+      position:absolute;
+      width:620px;
+      height:620px;
+      left:50%;
+      top:42%;
+      transform:translate(-50%,-50%);
+      background:rgba(37,99,235,0.20);
+      border-radius:50%;
+      filter:blur(190px);
+      animation:pulseGlow 5.5s ease-in-out infinite;
+    }
+
+    .ring{
+      position:absolute;
+      left:50%;
+      top:42%;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.08);
+      transform:translate(-50%,-50%);
+      animation:spin linear infinite;
+    }
+
+    .r1{width:250px;height:250px;animation-duration:18s;}
+    .r2{width:400px;height:400px;border-color:rgba(96,165,250,0.18);animation-duration:12s;animation-direction:reverse;}
+    .r3{width:570px;height:570px;border-color:rgba(255,255,255,0.05);animation-duration:9s;}
+
+    .line{
+      position:absolute;
+      left:50%;
+      top:42%;
+      width:275px;
+      height:2px;
+      background:linear-gradient(to right, transparent, #3b82f6, transparent);
+      transform-origin:left center;
+      animation:linePulse 2.4s ease-in-out infinite;
+    }
+
+    .l1{transform:translate(-50%,-50%) rotate(0deg)}
+    .l2{transform:translate(-50%,-50%) rotate(90deg)}
+    .l3{transform:translate(-50%,-50%) rotate(45deg)}
+    .l4{transform:translate(-50%,-50%) rotate(-45deg)}
+
+    .node{
+      position:absolute;
+      padding:12px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      color:rgba(255,255,255,0.82);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 18px rgba(0,0,0,0.12);
+      z-index:3;
+      transition:.22s ease;
+    }
+
+    .node:hover{
+      background:rgba(255,255,255,0.1);
+      transform:scale(1.03);
+    }
+
+    .n1{top:8%;left:50%;transform:translateX(-50%)}
+    .n2{right:5%;top:42%;transform:translateY(-50%)}
+    .n3{bottom:18%;left:50%;transform:translateX(-50%)}
+    .n4{left:5%;top:42%;transform:translateY(-50%)}
+
+    .particle{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      top:42%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      z-index:3;
+    }
+
+    .p1{
+      background:linear-gradient(135deg,#2563EB,#60A5FA);
+      box-shadow:0 0 18px rgba(37,99,235,0.55);
+      animation:orbit 8s linear infinite;
+    }
+
+    .p2{
+      width:12px;
+      height:12px;
+      background:var(--gold);
+      box-shadow:0 0 18px rgba(212,167,79,0.42);
+      animation:orbitTwo 6s linear infinite;
+    }
+
+    .p3{
+      width:9px;
+      height:9px;
+      background:#fff;
+      box-shadow:0 0 14px rgba(255,255,255,0.38);
+      animation:orbitThree 10s linear infinite;
+    }
+
+    .p4{
+      width:8px;
+      height:8px;
+      background:#60A5FA;
+      box-shadow:0 0 12px rgba(96,165,250,0.55);
+      animation:orbitFour 12s linear infinite;
+    }
+
+    .sentinel-core{
+      position:absolute;
+      left:50%;
+      top:42%;
+      transform:translate(-50%,-50%);
+      width:380px;
+      height:380px;
+      border-radius:34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(59,130,246,0.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 120px rgba(37,99,235,0.24),
+        inset 0 0 40px rgba(59,130,246,0.08);
+      z-index:4;
+      transition:.25s ease;
+    }
+
+    .sentinel-core:hover{
+      transform:translate(-50%,-50%) scale(1.02);
+    }
+
+    .sentinel-core::before{
+      content:"";
+      position:absolute;
+      width:120%;
+      height:120%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(59,130,246,0.25), transparent 70%);
+      animation:pulseCore 4s ease-in-out infinite;
+      z-index:0;
+    }
+
+    .sentinel-core::after{
+      content:"";
+      position:absolute;
+      inset:-20px;
+      border-radius:50%;
+      border:1px solid rgba(59,130,246,0.24);
+      animation:rotateCore 18s linear infinite;
+      z-index:1;
+    }
+
+    .sentinel-logo-large{
+      position:relative;
+      width:185px;
+      height:auto;
+      z-index:2;
+      filter:
+        drop-shadow(0 0 25px rgba(59,130,246,0.6))
+        drop-shadow(0 0 60px rgba(37,99,235,0.35));
+    }
+
+    .system-footer{
+      position:absolute;
+      left:20px;
+      right:20px;
+      bottom:20px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      z-index:5;
+    }
+
+    .sys-card{
+      border-radius:18px;
+      padding:20px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(8px);
+      text-align:center;
+      color:white;
+      transition:.22s ease;
+    }
+
+    .sys-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,255,255,0.14);
+      box-shadow:0 12px 28px rgba(0,0,0,0.16);
+    }
+
+    .sys-card strong{
+      display:block;
+      font-size:38px;
+      margin-bottom:6px;
+    }
+
+    .sys-card span{
+      font-size:13px;
+      color:rgba(255,255,255,0.58);
+    }
+
+    .section{
+      padding:84px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    h2{
+      margin:0;
+      font-size:54px;
+      line-height:.98;
+      letter-spacing:-0.05em;
+      font-weight:700;
+      max-width:760px;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:42px;
+      align-items:start;
+    }
+
+    .copy p{
+      margin-top:16px;
+      max-width:600px;
+      font-size:20px;
+      line-height:1.55;
+      color:#D5DEE8;
+    }
+
+    .line-list{
+      border-top:1px solid var(--line);
+    }
+
+    .line-item{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:20px;
+      padding:22px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .line-item h3{
+      margin:0;
+      font-size:21px;
+      line-height:1.22;
+      font-weight:600;
+    }
+
+    .line-item p{
+      margin:0;
+      font-size:15px;
+      line-height:1.55;
+      color:var(--muted);
+      text-align:right;
+    }
+
+    .vision-grid{
+      margin-top:34px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+    }
+
+    .vision-card{
+      min-height:200px;
+      border-radius:22px;
+      background:var(--panel-2);
+      border:1px solid rgba(255,255,255,0.06);
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.22s ease;
+    }
+
+    .vision-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,255,255,0.10);
+      box-shadow:0 16px 30px rgba(0,0,0,0.18);
+    }
+
+    .vision-card h3{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-0.03em;
+    }
+
+    .vision-card p{
+      margin:12px 0 0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:14px;
+    }
+
+    .vision-tag{
+      display:inline-flex;
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#B8D4FF;
+    }
+
+    .sentinel-section{
+      background:linear-gradient(180deg, #080B10 0%, #06080C 100%);
+      padding:100px 0 110px;
+    }
+
+    .sentinel-grid{
+      display:grid;
+      grid-template-columns:.88fr 1.12fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .sentinel-copy p{
+      margin-top:16px;
+      max-width:520px;
+      font-size:20px;
+      line-height:1.55;
+      color:#D5DEE8;
+    }
+
+    .sentinel-cta{
+      margin-top:24px;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .sentinel-preview{
+      position:relative;
+      border-radius:30px;
+      background:#0B1016;
+      color:white;
+      padding:22px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,0.06);
+      overflow:hidden;
+    }
+
+    .sentinel-preview::before{
+      content:"";
+      position:absolute;
+      width:260px;
+      height:260px;
+      left:50%;
+      top:46%;
+      transform:translate(-50%,-50%);
+      background:rgba(37,99,235,0.20);
+      border-radius:50%;
+      filter:blur(100px);
+      animation:pulseGlow 5s ease-in-out infinite;
+    }
+
+    .preview-top{
+      position:relative;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding-bottom:14px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .preview-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .preview-brand img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      filter:brightness(1.35) saturate(1.5);
+    }
+
+    .preview-brand div small{
+      display:block;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:rgba(255,255,255,0.45);
+    }
+
+    .preview-brand div span{
+      display:block;
+      margin-top:4px;
+      font-size:18px;
+      font-weight:600;
+    }
+
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(37,99,235,0.18);
+      border:1px solid rgba(96,165,250,0.20);
+      color:#dbeafe;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .preview-center{
+      position:relative;
+      z-index:2;
+      padding:30px 0 22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .preview-core{
+      width:320px;
+      height:320px;
+      border-radius:30px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(59,130,246,0.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 90px rgba(37,99,235,0.22),
+        inset 0 0 34px rgba(59,130,246,0.08);
+      position:relative;
+      transition:.22s ease;
+    }
+
+    .preview-core:hover{
+      transform:scale(1.02);
+    }
+
+    .preview-core::before{
+      content:"";
+      position:absolute;
+      width:118%;
+      height:118%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(59,130,246,0.22), transparent 70%);
+      animation:pulseCore 4s ease-in-out infinite;
+      z-index:0;
+    }
+
+    .preview-core img{
+      width:180px;
+      height:180px;
+      object-fit:contain;
+      position:relative;
+      z-index:2;
+      filter:
+        drop-shadow(0 0 22px rgba(59,130,246,0.58))
+        drop-shadow(0 0 50px rgba(37,99,235,0.32));
+    }
+
+    .preview-body{
+      position:relative;
+      z-index:2;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:26px;
+    }
+
+    .metric{
+      border-radius:16px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:16px;
+      transition:.22s ease;
+    }
+
+    .metric:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,255,255,0.12);
+    }
+
+    .metric small{
+      display:block;
+      font-size:11px;
+      color:rgba(255,255,255,0.45);
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      margin-bottom:8px;
+    }
+
+    .metric strong{
+      display:block;
+      font-size:34px;
+      margin-bottom:6px;
+    }
+
+    .metric span{
+      font-size:13px;
+      color:rgba(255,255,255,0.62);
+    }
+
+    .principles{
+      background:linear-gradient(180deg,#070B10,#05070A);
+    }
+
+    .principles-grid{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:42px;
+      align-items:center;
+    }
+
+    .city-image-panel{
+      position:relative;
+      min-height:540px;
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.06);
+      background:
+        linear-gradient(180deg, rgba(4,8,14,0.18), rgba(4,8,14,0.32)),
+        url("future-systems-city.png") center center / cover no-repeat;
+      box-shadow:var(--shadow);
+      transition:transform .35s ease, box-shadow .35s ease, filter .35s ease;
+      filter:contrast(1.05) brightness(0.95) saturate(1.08);
+    }
+
+    .city-image-panel:hover{
+      transform:translateY(-4px) scale(1.01);
+      box-shadow:0 30px 90px rgba(0,0,0,0.3);
+      filter:contrast(1.08) brightness(0.98) saturate(1.12);
+    }
+
+    .city-image-panel::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 40%, rgba(96,165,250,0.16), transparent 38%),
+        linear-gradient(180deg, rgba(5,7,10,0.02), rgba(5,7,10,0.20));
+      pointer-events:none;
+    }
+
+    .city-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(5,7,10,0.05) 0%, rgba(5,7,10,0.20) 100%);
+    }
+
+    .city-tag{
+      position:absolute;
+      left:26px;
+      top:24px;
+      padding:10px 14px;
+      border-radius:12px;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:#dbeafe;
+      background:rgba(37,99,235,0.18);
+      border:1px solid rgba(96,165,250,0.24);
+      backdrop-filter:blur(8px);
+      z-index:2;
+    }
+
+    .quote h2{
+      max-width:860px;
+    }
+
+    .quote p{
+      margin-top:16px;
+      max-width:620px;
+      font-size:20px;
+      line-height:1.58;
+      color:#D5DEE8;
+    }
+
+    .release-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:30px;
+    }
+
+    .release-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .release-card{
+      border-radius:24px;
+      background:var(--panel-2);
+      padding:28px;
+      min-height:350px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      border:1px solid rgba(255,255,255,0.06);
+      transition:.22s ease;
+    }
+
+    .release-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,255,255,0.10);
+      box-shadow:0 16px 30px rgba(0,0,0,0.18);
+    }
+
+    .release-card h3{
+      margin:0;
+      font-size:26px;
+      line-height:1.12;
+      letter-spacing:-0.03em;
+    }
+
+    .release-card p{
+      margin:14px 0 0;
+      font-size:17px;
+      line-height:1.52;
+      color:#CBD5E1;
+    }
+
+    .release-meta{
+      margin-top:24px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding-top:16px;
+    }
+
+    .release-meta-row{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      padding:10px 0;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      font-size:14px;
+      color:#D5DEE8;
+    }
+
+    .release-meta-row:last-child{border-bottom:none}
+
+    .release-meta-row strong{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--muted);
+    }
+
+    .footer{
+      background:#030508;
+      color:white;
+      padding:62px 0 42px;
+    }
+
+    .footer-top{
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      gap:34px;
+      margin-bottom:36px;
+    }
+
+    .footer-top h2{
+      color:white;
+      font-size:50px;
+    }
+
+    .footer-top p{
+      margin-top:16px;
+      max-width:520px;
+      color:rgba(255,255,255,0.72);
+      font-size:19px;
+      line-height:1.55;
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:30px;
+      padding-top:24px;
+      border-top:1px solid rgba(255,255,255,0.10);
+    }
+
+    .footer-col h4{
+      margin:0 0 16px;
+      font-size:15px;
+      color:white;
+    }
+
+    .footer-col a{
+      display:block;
+      margin:0 0 12px;
+      color:rgba(255,255,255,0.68);
+      font-size:14px;
+    }
+
+    .footer-col a:hover{color:white}
+
+    @keyframes spin{
+      from{transform:translate(-50%,-50%) rotate(0deg)}
+      to{transform:translate(-50%,-50%) rotate(360deg)}
+    }
+
+    @keyframes pulseGlow{
+      0%,100%{opacity:.45}
+      50%{opacity:.85}
+    }
+
+    @keyframes linePulse{
+      0%,100%{opacity:.22}
+      50%{opacity:1}
+    }
+
+    @keyframes orbit{
+      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(130px) rotate(0deg)}
+      100%{transform:translate(-50%,-50%) rotate(360deg) translateX(130px) rotate(-360deg)}
+    }
+
+    @keyframes orbitTwo{
+      0%{transform:translate(-50%,-50%) rotate(360deg) translateX(90px) rotate(-360deg)}
+      100%{transform:translate(-50%,-50%) rotate(0deg) translateX(90px) rotate(0deg)}
+    }
+
+    @keyframes orbitThree{
+      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(180px) rotate(0deg)}
+      100%{transform:translate(-50%,-50%) rotate(-360deg) translateX(180px) rotate(360deg)}
+    }
+
+    @keyframes orbitFour{
+      0%{transform:translate(-50%,-50%) rotate(180deg) translateX(220px) rotate(-180deg)}
+      100%{transform:translate(-50%,-50%) rotate(540deg) translateX(220px) rotate(-540deg)}
+    }
+
+    @keyframes pulseCore{
+      0%{transform:scale(0.9); opacity:0.4;}
+      50%{transform:scale(1.1); opacity:1;}
+      100%{transform:scale(0.9); opacity:0.4;}
+    }
+
+    @keyframes rotateCore{
+      from{transform:rotate(0deg);}
+      to{transform:rotate(360deg);}
+    }
+
+    @media (max-width: 1100px){
+      h1{font-size:62px}
+      h2{font-size:44px}
+      .hero-grid,
+      .split,
+      .sentinel-grid,
+      .principles-grid,
+      .footer-top{
+        grid-template-columns:1fr;
+      }
+      .vision-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+      .release-grid,
+      .footer-grid{
+        grid-template-columns:1fr 1fr;
+      }
+      .nav{display:none}
+    }
+
+    @media (max-width: 780px){
+      .container{padding:0 20px}
+      .logo-wrap img{width:180px}
+      h1{font-size:44px}
+      h2{font-size:34px}
+      .hero{padding:52px 0 42px}
+      .section{padding:68px 0}
+      .hero-sub,
+      .copy p,
+      .sentinel-copy p,
+      .quote p,
+      .footer-top p{font-size:18px}
+      .hero-meta,
+      .vision-grid,
+      .release-grid,
+      .footer-grid,
+      .preview-body,
+      .system-footer{
+        grid-template-columns:1fr;
+      }
+      .line-item{
+        grid-template-columns:1fr;
+      }
+      .line-item p{text-align:left}
+      .hero-system{min-height:820px}
+      .sentinel-core{
+        width:230px;
+        height:230px;
+      }
+      .sentinel-logo-large{
+        width:140px;
+      }
+      .preview-core{
+        width:230px;
+        height:230px;
+      }
+      .preview-core img{
+        width:140px;
+        height:140px;
+      }
+      .r1{width:180px;height:180px}
+      .r2{width:280px;height:280px}
+      .r3{width:380px;height:380px}
+      .city-image-panel{min-height:420px}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo-wrap">
+        <img src="porthos-logo.png" alt="Porthos Labs">
+      </div>
+      <nav class="nav">
+        <a href="#platform">Platform</a>
+        <a href="sentinel.html">Sentinel</a>
+        <a href="#vision">Vision</a>
+        <a href="#releases">Releases</a>
+        <a href="sentinel.html" class="btn btn-primary">Enter Sentinel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Porthos Labs</div>
+          <h1>Designing tomorrow’s future, today.</h1>
+          <div class="hero-sub">
+            We build intelligent products, AI infrastructure, and future systems for the next era of technology.
+          </div>
+
+          <div class="hero-actions">
+            <a href="sentinel.html" class="btn btn-primary">Enter Sentinel</a>
+            <a href="#vision" class="btn btn-secondary">See the vision</a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="meta-item">
+              <small>Products</small>
+              <div>AI systems built for real-world intelligence.</div>
+            </div>
+            <div class="meta-item">
+              <small>Infrastructure</small>
+              <div>Core layers for visibility, control, and execution.</div>
+            </div>
+            <div class="meta-item">
+              <small>Ventures</small>
+              <div>New businesses designed for the AI economy.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-system">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+
+          <div class="line l1"></div>
+          <div class="line l2"></div>
+          <div class="line l3"></div>
+          <div class="line l4"></div>
+
+          <div class="node n1">AI</div>
+          <div class="node n2">API</div>
+          <div class="node n3">DATA</div>
+          <div class="node n4">FLOW</div>
+
+          <div class="particle p1"></div>
+          <div class="particle p2"></div>
+          <div class="particle p3"></div>
+          <div class="particle p4"></div>
+
+          <div class="sentinel-core">
+            <img src="sentinel-logo.png" class="sentinel-logo-large" alt="Sentinel" />
+          </div>
+
+          <div class="system-footer">
+            <div class="sys-card">
+              <strong class="count" data-target="27">0</strong>
+              <span>live agents</span>
+            </div>
+            <div class="sys-card">
+              <strong class="count" data-target="18">0</strong>
+              <span>blocked threats</span>
+            </div>
+            <div class="sys-card">
+              <strong class="count" data-target="96" data-suffix="%">0</strong>
+              <span>safe state</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="platform">
+      <div class="container split">
+        <div class="copy">
+          <div class="eyebrow">Platform overview</div>
+          <h2>More than governance. More than software.</h2>
+          <p>
+            Porthos Labs is building an ecosystem of intelligent products, control systems, and new ventures designed for the AI era.
+          </p>
+        </div>
+
+        <div class="line-list">
+          <div class="line-item">
+            <h3>AI products built for real-world execution</h3>
+            <p>Systems, agents, and applications designed for live environments.</p>
+          </div>
+          <div class="line-item">
+            <h3>Infrastructure that controls how intelligence operates</h3>
+            <p>Visibility, policy, and intervention built into the architecture.</p>
+          </div>
+          <div class="line-item">
+            <h3>Future systems designed to scale into platforms</h3>
+            <p>From first product to category-defining company.</p>
+          </div>
+          <div class="line-item">
+            <h3>Expansion through internal builds and new ventures</h3>
+            <p>We don’t just ship products. We create the next ecosystem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vision">
+      <div class="container">
+        <div class="eyebrow">What we build</div>
+        <h2>Products. Infrastructure. Ventures. Systems.</h2>
+
+        <div class="vision-grid">
+          <div class="vision-card">
+            <div>
+              <div class="vision-tag">01 / AI Products</div>
+              <h3>Intelligent software</h3>
+              <p>Applications and agents designed to solve real operational problems at scale.</p>
+            </div>
+          </div>
+
+          <div class="vision-card">
+            <div>
+              <div class="vision-tag">02 / Infrastructure</div>
+              <h3>Control systems</h3>
+              <p>Core layers for visibility, governance, control, and live execution.</p>
+            </div>
+          </div>
+
+          <div class="vision-card">
+            <div>
+              <div class="vision-tag">03 / Ventures</div>
+              <h3>New businesses</h3>
+              <p>Companies created around intelligent products and emerging AI categories.</p>
+            </div>
+          </div>
+
+          <div class="vision-card">
+            <div>
+              <div class="vision-tag">04 / Future Systems</div>
+              <h3>What comes next</h3>
+              <p>Technology for the world after software becomes autonomous and ambient.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sentinel-section">
+      <div class="container sentinel-grid">
+        <div class="sentinel-copy">
+          <div class="eyebrow">Flagship product</div>
+          <h2>Sentinel</h2>
+          <p>
+            Sentinel is the live control layer for data systems, AI workflows, and operational environments. It is the first expression of the Porthos Labs vision.
+          </p>
+          <div class="sentinel-cta">
+            <a href="sentinel.html" class="btn btn-primary">Launch Sentinel</a>
+            <a href="#releases" class="btn btn-secondary">View updates</a>
+          </div>
+        </div>
+
+        <div class="sentinel-preview">
+          <div class="preview-top">
+            <div class="preview-brand">
+              <img src="sentinel-logo.png" alt="Sentinel">
+              <div>
+                <small>System core</small>
+                <span>Sentinel</span>
+              </div>
+            </div>
+            <div class="pill">Live governance</div>
+          </div>
+
+          <div class="preview-center">
+            <div class="preview-core">
+              <img src="sentinel-logo.png" alt="Sentinel">
+            </div>
+          </div>
+
+          <div class="preview-body">
+            <div class="metric">
+              <small>Policy events</small>
+              <strong class="count" data-target="27">0</strong>
+              <span>actions evaluated live</span>
+            </div>
+            <div class="metric">
+              <small>Threats blocked</small>
+              <strong class="count" data-target="18">0</strong>
+              <span>unauthorised events stopped</span>
+            </div>
+            <div class="metric">
+              <small>Safe state</small>
+              <strong class="count" data-target="96" data-suffix="%">0</strong>
+              <span>control posture score</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section principles">
+      <div class="container principles-grid">
+        <div class="city-image-panel">
+          <div class="city-overlay"></div>
+          <div class="city-tag">Future Systems</div>
+        </div>
+
+        <div class="quote">
+          <div class="eyebrow">Foundational view</div>
+          <h2>The future belongs to companies that don’t just use intelligence — they design its environment.</h2>
+          <p>
+            Porthos Labs creates products, infrastructure, and future-facing systems for the next era of software, AI, and machine-led operations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="releases">
+      <div class="container">
+        <div class="release-head">
+          <div>
+            <div class="eyebrow">Latest releases</div>
+            <h2>Signals from the lab.</h2>
+          </div>
+          <div style="font-size:17px;color:var(--muted);">Recent work from Porthos Labs</div>
+        </div>
+
+        <div class="release-grid">
+          <div class="release-card">
+            <div>
+              <h3>Sentinel / Control Layer</h3>
+              <p>A product surface for monitoring and enforcing action across data and AI systems.</p>
+            </div>
+            <div class="release-meta">
+              <div class="release-meta-row"><strong>Date</strong><span>April 2026</span></div>
+              <div class="release-meta-row"><strong>Category</strong><span>Product</span></div>
+            </div>
+          </div>
+
+          <div class="release-card">
+            <div>
+              <h3>Governance by design</h3>
+              <p>Why next-generation systems need policy, visibility, and enforceability built into the architecture.</p>
+            </div>
+            <div class="release-meta">
+              <div class="release-meta-row"><strong>Date</strong><span>April 2026</span></div>
+              <div class="release-meta-row"><strong>Category</strong><span>Principles</span></div>
+            </div>
+          </div>
+
+          <div class="release-card">
+            <div>
+              <h3>Future systems thesis</h3>
+              <p>A broader view on products, ventures, and the next era of intelligent infrastructure.</p>
+            </div>
+            <div class="release-meta">
+              <div class="release-meta-row"><strong>Date</strong><span>April 2026</span></div>
+              <div class="release-meta-row"><strong>Category</strong><span>Vision</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <div>
+            <div class="eyebrow" style="color:rgba(255,255,255,0.45)">Porthos Labs</div>
+            <h2>Building tomorrow’s future, today.</h2>
+          </div>
+          <div>
+            <p>
+              A company building intelligent products, AI infrastructure, and future-facing ventures for the next generation of technology.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Porthos</h4>
+            <a href="#">About</a>
+            <a href="#">Company</a>
+            <a href="#">Contact</a>
+          </div>
+          <div class="footer-col">
+            <h4>Products</h4>
+            <a href="sentinel.html">Sentinel</a>
+            <a href="#platform">Platform overview</a>
+            <a href="#">Access request</a>
+          </div>
+          <div class="footer-col">
+            <h4>Vision</h4>
+            <a href="#vision">What we build</a>
+            <a href="#">Future systems</a>
+            <a href="#">Ventures</a>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#releases">Releases</a>
+            <a href="#">Briefings</a>
+            <a href="#">Principles</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    function animateCounts() {
+      const counters = document.querySelectorAll('.count');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'), 10);
+        const suffix = counter.getAttribute('data-suffix') || '';
+        let current = 0;
+        const increment = Math.max(1, Math.ceil(target / 40));
+
+        const updateCounter = () => {
+          current += increment;
+          if (current >= target) {
+            counter.textContent = target + suffix;
+          } else {
+            counter.textContent = current + suffix;
+            requestAnimationFrame(updateCounter);
+          }
+        };
+
+        updateCounter();
+      });
+    }
+
+    window.addEventListener('load', animateCounts);
+  </script>
+</body>
+</html>
