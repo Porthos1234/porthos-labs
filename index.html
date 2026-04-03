@@ -6,16 +6,16 @@
   <title>Porthos Labs</title>
   <style>
     :root{
-      --bg:#ffffff;
-      --bg-soft:#fbfcfe;
-      --panel:#f7f9fc;
-      --text:#0b0b0c;
-      --muted:#6b7280;
-      --line:rgba(11,11,12,0.08);
-      --blue:#2563eb;
-      --blue-2:#60a5fa;
-      --black:#0b0b0c;
-      --white:#ffffff;
+      --bg:#05070A;
+      --panel:#0B0F14;
+      --panel-2:#10161D;
+      --text:#F5F7FA;
+      --muted:#94A3B8;
+      --line:rgba(255,255,255,0.08);
+      --blue:#2563EB;
+      --blue-2:#60A5FA;
+      --red:#EF4444;
+      --gold:#D4A74F;
     }
 
     *{box-sizing:border-box}
@@ -23,7 +23,10 @@
     body{
       margin:0;
       font-family:Inter, Arial, Helvetica, sans-serif;
-      background:var(--bg);
+      background:
+        radial-gradient(circle at 80% 10%, rgba(37,99,235,0.12), transparent 22%),
+        radial-gradient(circle at 20% 0%, rgba(96,165,250,0.08), transparent 18%),
+        var(--bg);
       color:var(--text);
     }
 
@@ -44,13 +47,13 @@
       position:sticky;
       top:0;
       z-index:50;
-      background:rgba(255,255,255,0.94);
+      background:rgba(5,7,10,0.84);
       backdrop-filter:blur(12px);
       border-bottom:1px solid var(--line);
     }
 
     .header-inner{
-      min-height:90px;
+      min-height:88px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -65,7 +68,7 @@
     .nav{
       display:flex;
       align-items:center;
-      gap:30px;
+      gap:28px;
       font-size:15px;
       color:var(--muted);
     }
@@ -85,8 +88,8 @@
     }
 
     .btn-dark{
-      background:var(--black);
-      color:var(--white);
+      background:#fff;
+      color:#000;
     }
 
     .btn-dark:hover{opacity:.92}
@@ -97,20 +100,17 @@
       border-color:var(--line);
     }
 
-    .btn-light:hover{
-      background:rgba(11,11,12,0.03);
-    }
+    .btn-light:hover{background:rgba(255,255,255,0.04)}
 
     .hero{
       padding:72px 0 54px;
       border-bottom:1px solid var(--line);
       overflow:hidden;
-      background:#fff;
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.02fr .98fr;
+      grid-template-columns:1.05fr .95fr;
       gap:54px;
       align-items:center;
     }
@@ -130,15 +130,15 @@
       line-height:.92;
       letter-spacing:-0.06em;
       font-weight:700;
-      max-width:780px;
+      max-width:800px;
     }
 
     .hero-sub{
       margin-top:24px;
-      max-width:660px;
+      max-width:690px;
       font-size:24px;
       line-height:1.45;
-      color:#1b1d20;
+      color:#D6E0EA;
     }
 
     .hero-actions{
@@ -149,7 +149,7 @@
     }
 
     .hero-meta{
-      margin-top:46px;
+      margin-top:44px;
       padding-top:20px;
       border-top:1px solid var(--line);
       display:grid;
@@ -169,28 +169,30 @@
     .meta-item div{
       font-size:17px;
       line-height:1.45;
+      color:#D9E1E8;
     }
 
     .hero-visual{
       position:relative;
-      min-height:620px;
+      min-height:640px;
       border-radius:38px;
-      background:linear-gradient(180deg,#08101b,#03070d);
+      background:linear-gradient(180deg,#0A1017,#060A0F);
       overflow:hidden;
-      box-shadow:0 30px 80px rgba(17,24,39,0.14);
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 30px 80px rgba(0,0,0,0.35);
     }
 
     .hero-visual::before{
       content:"";
       position:absolute;
-      width:480px;
-      height:480px;
+      width:520px;
+      height:520px;
       left:50%;
       top:42%;
       transform:translate(-50%,-50%);
-      background:rgba(37,99,235,0.28);
+      background:rgba(37,99,235,0.26);
       border-radius:50%;
-      filter:blur(160px);
+      filter:blur(170px);
       animation:pulse 4s ease-in-out infinite;
     }
 
@@ -230,7 +232,7 @@
       border-radius:14px;
       background:rgba(255,255,255,0.06);
       border:1px solid rgba(255,255,255,0.10);
-      color:rgba(255,255,255,0.78);
+      color:rgba(255,255,255,0.82);
       font-size:12px;
       letter-spacing:.12em;
       text-transform:uppercase;
@@ -245,25 +247,25 @@
     .sentinel-core{
       position:absolute;
       left:50%;
-      top:44%;
+      top:43%;
       transform:translate(-50%,-50%);
-      width:300px;
-      height:300px;
-      border-radius:44px;
+      width:320px;
+      height:320px;
+      border-radius:46px;
       background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(37,99,235,0.16));
-      border:1px solid rgba(96,165,250,0.24);
+      border:1px solid rgba(96,165,250,0.22);
       display:flex;
       align-items:center;
       justify-content:center;
-      box-shadow:0 0 120px rgba(37,99,235,0.40);
+      box-shadow:0 0 140px rgba(37,99,235,0.42);
       animation:corePulse 2.5s ease-in-out infinite;
     }
 
     .sentinel-core img{
-      width:235px;
-      height:235px;
+      width:250px;
+      height:250px;
       object-fit:contain;
-      filter:brightness(1.35) saturate(1.5);
+      filter:brightness(1.35) saturate(1.55);
     }
 
     .visual-footer{
@@ -300,7 +302,6 @@
     .section{
       padding:88px 0;
       border-bottom:1px solid var(--line);
-      background:#fff;
     }
 
     h2{
@@ -324,7 +325,7 @@
       max-width:620px;
       font-size:21px;
       line-height:1.55;
-      color:#2a2a2a;
+      color:#D5DEE8;
     }
 
     .line-list{
@@ -365,13 +366,13 @@
       border:1px solid var(--line);
       border-radius:26px;
       padding:28px;
-      background:white;
+      background:var(--panel);
       transition:.2s ease;
     }
 
     .cap-card:hover{
       transform:translateY(-4px);
-      box-shadow:0 14px 34px rgba(17,24,39,0.06);
+      box-shadow:0 14px 34px rgba(0,0,0,0.18);
     }
 
     .cap-icon{
@@ -380,8 +381,8 @@
       border-radius:16px;
       display:grid;
       place-items:center;
-      background:linear-gradient(135deg, rgba(37,99,235,0.14), rgba(96,165,250,0.20));
-      color:var(--blue);
+      background:linear-gradient(135deg, rgba(37,99,235,0.20), rgba(96,165,250,0.18));
+      color:#B8D4FF;
       font-size:18px;
       font-weight:700;
     }
@@ -400,7 +401,7 @@
     }
 
     .sentinel-section{
-      background:var(--bg-soft);
+      background:var(--panel);
     }
 
     .sentinel-grid{
@@ -415,7 +416,7 @@
       max-width:540px;
       font-size:21px;
       line-height:1.55;
-      color:#2a2a2a;
+      color:#D5DEE8;
     }
 
     .sentinel-cta{
@@ -427,10 +428,11 @@
 
     .sentinel-preview{
       border-radius:34px;
-      background:#0b1016;
+      background:#0B1016;
       color:white;
       padding:24px;
-      box-shadow:0 24px 70px rgba(15,23,42,0.14);
+      box-shadow:0 24px 70px rgba(0,0,0,0.22);
+      border:1px solid rgba(255,255,255,0.06);
     }
 
     .preview-top{
@@ -449,8 +451,8 @@
     }
 
     .preview-brand img{
-      width:40px;
-      height:40px;
+      width:44px;
+      height:44px;
       object-fit:contain;
       filter:brightness(1.35) saturate(1.5);
     }
@@ -514,6 +516,107 @@
       color:rgba(255,255,255,0.62);
     }
 
+    .principles{
+      background:linear-gradient(180deg,#070B10,#05070A);
+    }
+
+    .principles-grid{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:42px;
+      align-items:center;
+    }
+
+    .motion-panel{
+      position:relative;
+      min-height:520px;
+      border-radius:34px;
+      background:linear-gradient(180deg,#09111B,#05070A);
+      border:1px solid rgba(255,255,255,0.06);
+      overflow:hidden;
+    }
+
+    .motion-panel::before{
+      content:"";
+      position:absolute;
+      width:320px;
+      height:320px;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      background:rgba(37,99,235,0.20);
+      border-radius:50%;
+      filter:blur(120px);
+      animation:pulse 5s ease-in-out infinite;
+    }
+
+    .motion-ring{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.07);
+    }
+
+    .mr1{width:180px;height:180px;animation:spin 14s linear infinite;}
+    .mr2{width:280px;height:280px;border-color:rgba(96,165,250,0.16);animation:spinReverse 10s linear infinite;}
+    .mr3{width:390px;height:390px;border-color:rgba(255,255,255,0.05);animation:spin 7s linear infinite;}
+
+    .signal{
+      position:absolute;
+      width:14px;
+      height:14px;
+      border-radius:50%;
+      box-shadow:0 0 22px rgba(37,99,235,0.5);
+      top:50%;
+      left:50%;
+    }
+
+    .s1{
+      background:linear-gradient(135deg,#2563EB,#60A5FA);
+      animation:orbit 8s linear infinite;
+    }
+
+    .s2{
+      background:var(--gold);
+      animation:orbitTwo 6s linear infinite;
+    }
+
+    .s3{
+      width:10px;
+      height:10px;
+      background:#fff;
+      animation:orbitThree 10s linear infinite;
+    }
+
+    .governance-tag{
+      position:absolute;
+      top:24%;
+      left:50%;
+      transform:translateX(-50%);
+      padding:8px 12px;
+      border-radius:10px;
+      background:rgba(212,167,79,0.95);
+      color:#111;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .quote h2{
+      max-width:860px;
+    }
+
+    .quote p{
+      margin-top:18px;
+      max-width:650px;
+      font-size:22px;
+      line-height:1.55;
+      color:#D5DEE8;
+    }
+
     .release-head{
       display:flex;
       align-items:end;
@@ -530,12 +633,13 @@
 
     .release-card{
       border-radius:28px;
-      background:#f7f9fc;
+      background:var(--panel-2);
       padding:30px;
       min-height:390px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
+      border:1px solid rgba(255,255,255,0.06);
     }
 
     .release-card h3{
@@ -549,12 +653,12 @@
       margin:14px 0 0;
       font-size:18px;
       line-height:1.5;
-      color:#2c2f35;
+      color:#CBD5E1;
     }
 
     .release-meta{
       margin-top:24px;
-      border-top:1px solid rgba(17,17,17,0.10);
+      border-top:1px solid rgba(255,255,255,0.08);
       padding-top:18px;
     }
 
@@ -563,9 +667,9 @@
       justify-content:space-between;
       gap:14px;
       padding:10px 0;
-      border-bottom:1px solid rgba(17,17,17,0.08);
+      border-bottom:1px solid rgba(255,255,255,0.08);
       font-size:14px;
-      color:#2a2a2a;
+      color:#D5DEE8;
     }
 
     .release-meta-row:last-child{border-bottom:none}
@@ -574,119 +678,11 @@
       font-size:12px;
       text-transform:uppercase;
       letter-spacing:.14em;
-    }
-
-    .map-section{
-      background:#ffffff;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .map-grid{
-      display:grid;
-      grid-template-columns:.9fr 1.1fr;
-      gap:42px;
-      align-items:center;
-    }
-
-    .globe-motion{
-      position:relative;
-      aspect-ratio:1 / 1;
-      border-radius:50%;
-      overflow:hidden;
-      background:
-        radial-gradient(circle at center, rgba(37,99,235,0.08), transparent 50%),
-        #fbfcfe;
-      border:1px solid rgba(11,11,12,0.08);
-    }
-
-    .globe-motion::before{
-      content:"";
-      position:absolute;
-      inset:8%;
-      border-radius:50%;
-      border:1px solid rgba(11,11,12,0.08);
-      animation:spin 18s linear infinite;
-    }
-
-    .globe-motion::after{
-      content:"";
-      position:absolute;
-      inset:18%;
-      border-radius:50%;
-      border:1px solid rgba(37,99,235,0.12);
-      animation:spinReverse 12s linear infinite;
-    }
-
-    .grid-lines{
-      position:absolute;
-      inset:0;
-      background:
-        repeating-linear-gradient(to bottom, transparent 0 34px, rgba(11,11,12,0.04) 34px 35px),
-        repeating-linear-gradient(to right, transparent 0 34px, rgba(11,11,12,0.04) 34px 35px);
-      opacity:.8;
-      animation:gridShift 10s linear infinite;
-    }
-
-    .moving-dot{
-      position:absolute;
-      width:16px;
-      height:16px;
-      border-radius:50%;
-      background:linear-gradient(135deg, #2563eb, #60a5fa);
-      box-shadow:0 0 24px rgba(37,99,235,0.35);
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      animation:orbit 8s linear infinite;
-    }
-
-    .moving-dot.two{
-      width:12px;
-      height:12px;
-      animation:orbitTwo 6s linear infinite;
-      background:#d8ad53;
-      box-shadow:0 0 18px rgba(216,173,83,0.35);
-    }
-
-    .moving-dot.three{
-      width:10px;
-      height:10px;
-      animation:orbitThree 10s linear infinite;
-      background:#111;
-      box-shadow:0 0 14px rgba(17,17,17,0.18);
-    }
-
-    .country-tag{
-      position:absolute;
-      top:38%;
-      left:47%;
-      transform:translate(-50%,-50%);
-      padding:6px 10px;
-      border-radius:8px;
-      background:#d8ad53;
-      color:#111;
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      z-index:2;
-    }
-
-    .quote h2{
-      max-width:860px;
-    }
-
-    .quote p{
-      margin-top:18px;
-      max-width:650px;
-      font-size:22px;
-      line-height:1.55;
-      color:#2a2a2a;
+      color:var(--muted);
     }
 
     .footer{
-      background:#111111;
+      background:#030508;
       color:white;
       padding:74px 0 46px;
     }
@@ -735,18 +731,18 @@
     .footer-col a:hover{color:white}
 
     @keyframes spin{
-      from{transform:rotate(0deg)}
-      to{transform:rotate(360deg)}
+      from{transform:translate(-50%,-50%) rotate(0deg)}
+      to{transform:translate(-50%,-50%) rotate(360deg)}
     }
 
     @keyframes spinReverse{
-      from{transform:rotate(360deg)}
-      to{transform:rotate(0deg)}
+      from{transform:translate(-50%,-50%) rotate(360deg)}
+      to{transform:translate(-50%,-50%) rotate(0deg)}
     }
 
     @keyframes pulse{
-      0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.48}
-      50%{transform:translate(-50%,-50%) scale(1.2);opacity:.85}
+      0%,100%{opacity:.45}
+      50%{opacity:.85}
     }
 
     @keyframes blink{
@@ -760,24 +756,18 @@
     }
 
     @keyframes orbit{
-      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(180px) rotate(0deg)}
-      100%{transform:translate(-50%,-50%) rotate(360deg) translateX(180px) rotate(-360deg)}
+      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(120px) rotate(0deg)}
+      100%{transform:translate(-50%,-50%) rotate(360deg) translateX(120px) rotate(-360deg)}
     }
 
     @keyframes orbitTwo{
-      0%{transform:translate(-50%,-50%) rotate(360deg) translateX(120px) rotate(-360deg)}
-      100%{transform:translate(-50%,-50%) rotate(0deg) translateX(120px) rotate(0deg)}
+      0%{transform:translate(-50%,-50%) rotate(360deg) translateX(80px) rotate(-360deg)}
+      100%{transform:translate(-50%,-50%) rotate(0deg) translateX(80px) rotate(0deg)}
     }
 
     @keyframes orbitThree{
-      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(230px) rotate(0deg)}
-      100%{transform:translate(-50%,-50%) rotate(-360deg) translateX(230px) rotate(360deg)}
-    }
-
-    @keyframes gridShift{
-      0%{transform:translate(0,0)}
-      50%{transform:translate(6px,6px)}
-      100%{transform:translate(0,0)}
+      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(170px) rotate(0deg)}
+      100%{transform:translate(-50%,-50%) rotate(-360deg) translateX(170px) rotate(360deg)}
     }
 
     @media (max-width: 1100px){
@@ -786,11 +776,11 @@
       .hero-grid,
       .split,
       .sentinel-grid,
-      .map-grid,
+      .principles-grid,
       .footer-top{
         grid-template-columns:1fr;
       }
-      .hero-visual{min-height:600px}
+      .hero-visual{min-height:640px}
       .nav{display:none}
     }
 
@@ -816,14 +806,14 @@
         grid-template-columns:1fr;
       }
       .line-item p{text-align:left}
-      .hero-visual{min-height:700px}
+      .hero-visual{min-height:740px}
       .sentinel-core{
-        width:200px;
-        height:200px;
+        width:220px;
+        height:220px;
       }
       .sentinel-core img{
-        width:155px;
-        height:155px;
+        width:170px;
+        height:170px;
       }
       .ring.r1{width:180px;height:180px}
       .ring.r2{width:260px;height:260px}
@@ -855,9 +845,9 @@
       <div class="container hero-grid">
         <div>
           <div class="eyebrow">Porthos Labs</div>
-          <h1>Infrastructure for governing data and AI systems.</h1>
+          <h1>Infrastructure for governing intelligent systems.</h1>
           <div class="hero-sub serif">
-            Building the control layer for organisations that need visibility, policy, and enforcement across intelligent systems.
+            Black-box systems are not enough. Porthos builds the control layer for visibility, governance, and enforcement across data and AI.
           </div>
 
           <div class="hero-actions">
@@ -1025,14 +1015,16 @@
       </div>
     </section>
 
-    <section class="section map-section" id="principles">
-      <div class="container map-grid">
-        <div class="globe-motion">
-          <div class="grid-lines"></div>
-          <div class="country-tag">Governance</div>
-          <div class="moving-dot"></div>
-          <div class="moving-dot two"></div>
-          <div class="moving-dot three"></div>
+    <section class="section principles" id="principles">
+      <div class="container principles-grid">
+        <div class="motion-panel">
+          <div class="motion-ring mr1"></div>
+          <div class="motion-ring mr2"></div>
+          <div class="motion-ring mr3"></div>
+          <div class="governance-tag">Governance</div>
+          <div class="signal s1"></div>
+          <div class="signal s2"></div>
+          <div class="signal s3"></div>
         </div>
 
         <div class="quote">
