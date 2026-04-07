@@ -1,1 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sentinel — Porthos Labs</title>
+  <style>
+    :root{
+      --bg:#05070A;
+      --panel:#0B0F14;
+      --panel-2:#10161D;
+      --text:#F5F7FA;
+      --muted:#94A3B8;
+      --line:rgba(255,255,255,0.08);
+      --line-strong:rgba(255,255,255,0.12);
+      --blue:#2563EB;
+      --blue-2:#60A5FA;
+      --gold:#D4A74F;
+      --shadow:0 24px 70px rgba(0,0,0,0.24);
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 80% 10%, rgba(37,99,235,0.16), transparent 20%),
+        radial-gradient(circle at 20% 0%, rgba(96,165,250,0.08), transparent 18%),
+        linear-gradient(180deg,#06080C 0%,#05070A 100%);
+      overflow-x:hidden;
+    }
+
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+
+    .container{
+      max-width:1280px;
+      margin:0 auto;
+      padding:0 28px;
+      position:relative;
+      z-index:2;
+    }
+
+    .boot{
+      position:fixed;
+      inset:0;
+      background:#030508;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:100;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:14px;
+      color:#DCE7F5;
+      animation:bootFade 2.4s forwards;
+    }
+
+    .boot::after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:rgba(37,99,235,0.22);
+      filter:blur(80px);
+      animation:pulseGlow 2s ease-in-out infinite;
+    }
+
+    .header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,7,10,0.78);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .header-inner{
+      min-height:84px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .logo-wrap img{
+      width:340px;
+      height:auto;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:26px;
+      font-size:15px;
+      color:var(--muted);
+    }
+
+    .nav a:hover{color:var(--text)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 22px;
+      border-radius:14px;
+      border:1px solid transparent;
+      font-size:15px;
+      transition:.22s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:#fff;
+      color:#000;
+      box-shadow:0 10px 28px rgba(255,255,255,0.08);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 34px rgba(255,255,255,0.12);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:var(--text);
+      border-color:var(--line);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.04);
+      border-color:var(--line-strong);
+      transform:translateY(-2px);
+    }
+
+    .hero{
+      padding:54px 0 40px;
+      border-bottom:1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:.82fr 1.18fr;
+      gap:34px;
+      align-items:start;
+    }
+
+    .hero-copy{
+      padding-top:18px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+
+    h1{
+      margin:0;
+      font-size:88px;
+      line-height:.88;
+      letter-spacing:-0.06em;
+      font-weight:700;
+      max-width:620px;
+    }
+
+    .hero-sub{
+      margin-top:18px;
+      max-width:520px;
+      font-size:22px;
+      line-height:1.46;
+      color:#CAD4DE;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .sentinel-stage{
+      position:relative;
+      min-height:800px;
+      border-radius:38px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        linear-gradient(180deg,#09111B,#05070A);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.06);
+      box-shadow:0 30px 80px rgba(0,0,0,0.36);
+    }
+
+    .sentinel-stage::before{
+      content:"";
+      position:absolute;
+      width:700px;
+      height:700px;
+      left:50%;
+      top:44%;
+      transform:translate(-50%,-50%);
+      background:rgba(37,99,235,0.20);
+      border-radius:50%;
+      filter:blur(210px);
+      animation:pulseGlow 5.5s ease-in-out infinite;
+    }
+
+    .stage-top{
+      position:absolute;
+      left:24px;
+      right:24px;
+      top:24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      z-index:5;
+      padding-bottom:18px;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .stage-brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .stage-brand img{
+      width:68px;
+      height:68px;
+      object-fit:contain;
+      filter:brightness(1.35) saturate(1.5);
+    }
+
+    .stage-brand small{
+      display:block;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:rgba(255,255,255,0.45);
+      margin-bottom:4px;
+    }
+
+    .stage-brand span{
+      font-size:22px;
+      font-weight:600;
+    }
+
+    .pill{
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(37,99,235,0.18);
+      border:1px solid rgba(96,165,250,0.20);
+      color:#dbeafe;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .ring{
+      position:absolute;
+      left:50%;
+      top:46%;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,0.08);
+      transform:translate(-50%,-50%);
+      animation:spin linear infinite;
+    }
+
+    .r1{width:290px;height:290px;animation-duration:18s;}
+    .r2{width:460px;height:460px;border-color:rgba(96,165,250,0.18);animation-duration:12s;animation-direction:reverse;}
+    .r3{width:640px;height:640px;border-color:rgba(255,255,255,0.05);animation-duration:9s;}
+
+    .line{
+      position:absolute;
+      left:50%;
+      top:46%;
+      width:330px;
+      height:2px;
+      background:linear-gradient(to right, transparent, #3b82f6, transparent);
+      transform-origin:left center;
+      animation:linePulse 2.4s ease-in-out infinite;
+    }
+
+    .l1{transform:translate(-50%,-50%) rotate(0deg)}
+    .l2{transform:translate(-50%,-50%) rotate(90deg)}
+    .l3{transform:translate(-50%,-50%) rotate(45deg)}
+    .l4{transform:translate(-50%,-50%) rotate(-45deg)}
+
+    .node{
+      position:absolute;
+      padding:12px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      color:rgba(255,255,255,0.82);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      backdrop-filter:blur(10px);
+      box-shadow:0 0 18px rgba(0,0,0,0.12);
+      z-index:3;
+      cursor:pointer;
+      transition:.22s ease;
+    }
+
+    .node:hover{
+      background:rgba(255,255,255,0.1);
+      transform:scale(1.03);
+    }
+
+    .n1{top:10%;left:50%;transform:translateX(-50%)}
+    .n2{right:6%;top:46%;transform:translateY(-50%)}
+    .n3{bottom:20%;left:50%;transform:translateX(-50%)}
+    .n4{left:6%;top:46%;transform:translateY(-50%)}
+
+    .particle{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      top:46%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      z-index:3;
+    }
+
+    .p1{
+      background:linear-gradient(135deg,#2563EB,#60A5FA);
+      box-shadow:0 0 18px rgba(37,99,235,0.55);
+      animation:orbit 8s linear infinite;
+    }
+
+    .p2{
+      width:12px;
+      height:12px;
+      background:var(--gold);
+      box-shadow:0 0 18px rgba(212,167,79,0.42);
+      animation:orbitTwo 6s linear infinite;
+    }
+
+    .p3{
+      width:9px;
+      height:9px;
+      background:#fff;
+      box-shadow:0 0 14px rgba(255,255,255,0.38);
+      animation:orbitThree 10s linear infinite;
+    }
+
+    .p4{
+      width:8px;
+      height:8px;
+      background:#60A5FA;
+      box-shadow:0 0 12px rgba(96,165,250,0.55);
+      animation:orbitFour 12s linear infinite;
+    }
+
+    .core{
+      position:absolute;
+      left:50%;
+      top:46%;
+      transform:translate(-50%,-50%);
+      width:500px;
+      height:500px;
+      border-radius:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(59,130,246,0.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 120px rgba(37,99,235,0.25),
+        inset 0 0 40px rgba(59,130,246,0.08);
+      z-index:4;
+      transition:.25s ease;
+    }
+
+    .core:hover{
+      transform:translate(-50%,-50%) scale(1.02);
+    }
+
+    .core::before{
+      content:"";
+      position:absolute;
+      width:120%;
+      height:120%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(59,130,246,0.25), transparent 70%);
+      animation:pulseCore 4s ease-in-out infinite;
+      z-index:0;
+    }
+
+    .core::after{
+      content:"";
+      position:absolute;
+      inset:-20px;
+      border-radius:50%;
+      border:1px solid rgba(59,130,246,0.25);
+      animation:rotateCore 18s linear infinite;
+      z-index:1;
+    }
+
+    .core img{
+      position:relative;
+      width:320px;
+      height:auto;
+      z-index:2;
+      filter:
+        drop-shadow(0 0 25px rgba(59,130,246,0.6))
+        drop-shadow(0 0 60px rgba(37,99,235,0.35));
+    }
+
+    .mini-tabs{
+      position:absolute;
+      left:50%;
+      bottom:158px;
+      transform:translateX(-50%);
+      display:flex;
+      gap:10px;
+      z-index:5;
+    }
+
+    .mini-tab{
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.04);
+      color:rgba(255,255,255,0.72);
+      font-size:14px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .mini-tab.active,
+    .mini-tab:hover{
+      background:#fff;
+      color:#000;
+    }
+
+    .stage-footer{
+      position:absolute;
+      left:24px;
+      right:24px;
+      bottom:20px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      z-index:5;
+    }
+
+    .stat-card{
+      border-radius:20px;
+      padding:22px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.10);
+      backdrop-filter:blur(8px);
+      color:white;
+      transition:.22s ease;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,255,255,0.14);
+      box-shadow:0 12px 28px rgba(0,0,0,0.16);
+    }
+
+    .stat-card small{
+      display:block;
+      font-size:12px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.45);
+      margin-bottom:12px;
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:44px;
+      margin-bottom:8px;
+    }
+
+    .stat-card span{
+      font-size:14px;
+      color:rgba(255,255,255,0.6);
+      line-height:1.45;
+    }
+
+    .section{
+      padding:94px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    h2{
+      margin:0;
+      font-size:56px;
+      line-height:.98;
+      letter-spacing:-0.05em;
+      font-weight:700;
+      max-width:760px;
+    }
+
+    .live-layout{
+      display:grid;
+      grid-template-columns:.92fr 1.08fr;
+      gap:38px;
+      align-items:start;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:30px 0 0;
+    }
+
+    .tab{
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.1);
+      background:transparent;
+      color:rgba(255,255,255,0.6);
+      font-size:14px;
+      cursor:pointer;
+    }
+
+    .tab.active{
+      background:#fff;
+      color:#000;
+    }
+
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+
+    .rows{
+      display:grid;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .row{
+      border-radius:16px;
+      padding:18px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      color:#D9E1E8;
+      font-size:15px;
+      line-height:1.5;
+      transition:.22s ease;
+    }
+
+    .row:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,0.12);
+    }
+
+    .drawer{
+      border-radius:24px;
+      padding:24px;
+      background:var(--panel-2);
+      border:1px solid rgba(255,255,255,0.06);
+      min-height:220px;
+      transition:.22s ease;
+    }
+
+    .drawer h3{
+      margin:0 0 12px;
+      font-size:26px;
+      letter-spacing:-0.03em;
+    }
+
+    .drawer p{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.65;
+    }
+
+    .signal-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .signal-card{
+      border-radius:18px;
+      padding:18px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      transition:.22s ease;
+    }
+
+    .signal-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(255,255,255,0.12);
+    }
+
+    .signal-card small{
+      display:block;
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.45);
+      margin-bottom:8px;
+    }
+
+    .signal-card strong{
+      display:block;
+      font-size:30px;
+      margin-bottom:6px;
+    }
+
+    .signal-card span{
+      color:rgba(255,255,255,0.6);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      margin-top:34px;
+    }
+
+    .card{
+      border-radius:24px;
+      padding:26px;
+      background:var(--panel);
+      border:1px solid rgba(255,255,255,0.06);
+      transition:.22s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,255,255,0.10);
+      box-shadow:0 16px 30px rgba(0,0,0,0.18);
+    }
+
+    .card h3{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-0.03em;
+    }
+
+    .card p{
+      margin:14px 0 0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+    }
+
+    .cta{
+      padding:96px 0 110px;
+    }
+
+    .cta-panel{
+      border-radius:34px;
+      padding:42px;
+      background:linear-gradient(180deg,#0B1016,#070B10);
+      border:1px solid rgba(255,255,255,0.06);
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+
+    .cta-panel::before{
+      content:"";
+      position:absolute;
+      width:280px;
+      height:280px;
+      right:5%;
+      top:20%;
+      background:rgba(37,99,235,0.18);
+      border-radius:50%;
+      filter:blur(100px);
+    }
+
+    .cta-panel h2{
+      max-width:860px;
+      position:relative;
+      z-index:1;
+    }
+
+    .cta-panel p{
+      margin-top:18px;
+      max-width:620px;
+      color:#D5DEE8;
+      font-size:20px;
+      line-height:1.55;
+      position:relative;
+      z-index:1;
+    }
+
+    .cta-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:30px;
+      position:relative;
+      z-index:1;
+    }
+
+    .footer{
+      background:#030508;
+      color:white;
+      padding:66px 0 42px;
+      border-top:1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:30px;
+    }
+
+    .footer-col h4{
+      margin:0 0 16px;
+      font-size:15px;
+      color:white;
+    }
+
+    .footer-col a{
+      display:block;
+      margin:0 0 12px;
+      color:rgba(255,255,255,0.68);
+      font-size:14px;
+    }
+
+    .footer-col a:hover{color:white}
+
+    @keyframes bootFade{
+      0%{opacity:1;visibility:visible}
+      80%{opacity:1;visibility:visible}
+      100%{opacity:0;visibility:hidden}
+    }
+
+    @keyframes spin{
+      from{transform:translate(-50%,-50%) rotate(0deg)}
+      to{transform:translate(-50%,-50%) rotate(360deg)}
+    }
+
+    @keyframes pulseGlow{
+      0%,100%{opacity:.45}
+      50%{opacity:.85}
+    }
+
+    @keyframes linePulse{
+      0%,100%{opacity:.22}
+      50%{opacity:1}
+    }
+
+    @keyframes orbit{
+      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(145px) rotate(0deg)}
+      100%{transform:translate(-50%,-50%) rotate(360deg) translateX(145px) rotate(-360deg)}
+    }
+
+    @keyframes orbitTwo{
+      0%{transform:translate(-50%,-50%) rotate(360deg) translateX(100px) rotate(-360deg)}
+      100%{transform:translate(-50%,-50%) rotate(0deg) translateX(100px) rotate(0deg)}
+    }
+
+    @keyframes orbitThree{
+      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(200px) rotate(0deg)}
+      100%{transform:translate(-50%,-50%) rotate(-360deg) translateX(200px) rotate(360deg)}
+    }
+
+    @keyframes orbitFour{
+      0%{transform:translate(-50%,-50%) rotate(180deg) translateX(245px) rotate(-180deg)}
+      100%{transform:translate(-50%,-50%) rotate(540deg) translateX(245px) rotate(-540deg)}
+    }
+
+    @keyframes pulseCore{
+      0%{transform:scale(0.9); opacity:0.4;}
+      50%{transform:scale(1.1); opacity:1;}
+      100%{transform:scale(0.9); opacity:0.4;}
+    }
+
+    @keyframes rotateCore{
+      from{transform:rotate(0deg);}
+      to{transform:rotate(360deg);}
+    }
+
+    @media (max-width: 1100px){
+      h1{font-size:64px}
+      h2{font-size:44px}
+      .hero-grid,
+      .live-layout,
+      .grid-2,
+      .footer-grid{
+        grid-template-columns:1fr;
+      }
+      .nav{display:none}
+    }
+
+    @media (max-width: 780px){
+      .container{padding:0 20px}
+      .logo-wrap img{width:220px}
+      h1{font-size:48px}
+      h2{font-size:34px}
+      .hero-sub,.cta-panel p{font-size:18px}
+      .hero{
+        padding:42px 0 32px;
+      }
+      .section{
+        padding:68px 0;
+      }
+      .stage-footer,.signal-grid{
+        grid-template-columns:1fr;
+      }
+      .sentinel-stage{
+        min-height:860px;
+      }
+      .core{
+        width:280px;
+        height:280px;
+      }
+      .core img{
+        width:180px;
+      }
+      .mini-tabs{
+        bottom:190px;
+        flex-wrap:wrap;
+        justify-content:center;
+        width:100%;
+        padding:0 18px;
+      }
+      .r1{width:180px;height:180px}
+      .r2{width:280px;height:280px}
+      .r3{width:380px;height:380px}
+    }
+  </style>
+</head>
+<body>
+  <div class="boot">Initializing Sentinel</div>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo-wrap">
+        <img src="porthos-logo.png" alt="Porthos Labs">
+      </div>
+      <nav class="nav">
+        <a href="index.html">Porthos</a>
+        <a href="#live">Platform</a>
+        <a href="#policy">Policy</a>
+        <a href="index.html" class="btn btn-primary">Back to Porthos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Flagship platform</div>
+          <h1>Control Reality.</h1>
+          <div class="hero-sub">
+            AI doesn’t run. You do.
+          </div>
+
+          <div class="hero-actions">
+            <a href="#live" class="btn btn-primary">View live system</a>
+            <a href="#deploy" class="btn btn-secondary">See deployment model</a>
+          </div>
+        </div>
+
+        <div class="sentinel-stage">
+          <div class="stage-top">
+            <div class="stage-brand">
+              <img src="sentinel-logo.png" alt="Sentinel">
+              <div>
+                <small>System core</small>
+                <span>Sentinel</span>
+              </div>
+            </div>
+            <div class="pill">Live governance</div>
+          </div>
+
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+
+          <div class="line l1"></div>
+          <div class="line l2"></div>
+          <div class="line l3"></div>
+          <div class="line l4"></div>
+
+          <button class="node n1" onclick="showNode('AI systems','Sentinel monitors live model behaviour, agent decisions, and execution pathways across intelligent systems.')">AI</button>
+          <button class="node n2" onclick="showNode('External APIs','Sentinel controls third-party access routes, outbound requests, and external execution boundaries.')">API</button>
+          <button class="node n3" onclick="showNode('Data layer','Sensitive records, warehouses, and internal knowledge systems remain under continuous policy control.')">Data</button>
+          <button class="node n4" onclick="showNode('Workflow layer','Automation flows are observed and enforced before action becomes exposure.')">Flow</button>
+
+          <div class="particle p1"></div>
+          <div class="particle p2"></div>
+          <div class="particle p3"></div>
+          <div class="particle p4"></div>
+
+          <div class="core">
+            <img src="sentinel-logo.png" alt="Sentinel">
+          </div>
+
+          <div class="mini-tabs">
+            <button class="mini-tab active" onclick="switchMiniTab(this, 'overview')">overview</button>
+            <button class="mini-tab" onclick="switchMiniTab(this, 'activity')">activity</button>
+            <button class="mini-tab" onclick="switchMiniTab(this, 'policytab')">policy</button>
+          </div>
+
+          <div class="stage-footer">
+            <div class="stat-card">
+              <small>Policy events</small>
+              <strong class="count" data-target="27">0</strong>
+              <span>actions evaluated live</span>
+            </div>
+            <div class="stat-card">
+              <small>Threats blocked</small>
+              <strong class="count" data-target="18">0</strong>
+              <span>unauthorised events stopped</span>
+            </div>
+            <div class="stat-card">
+              <small>Safe state</small>
+              <strong class="count" data-target="96" data-suffix="%">0</strong>
+              <span>control posture score</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="live">
+      <div class="container live-layout">
+        <div>
+          <div class="eyebrow">Live system</div>
+          <h2>One surface for visibility, policy, and intervention.</h2>
+
+          <div class="tabs">
+            <button class="tab active" onclick="switchTab('overview', this)">overview</button>
+            <button class="tab" onclick="switchTab('activity', this)">activity</button>
+            <button class="tab" onclick="switchTab('policytab', this)">policy</button>
+          </div>
+
+          <div id="overview" class="tab-panel active">
+            <div class="rows">
+              <div class="row">Sentinel keeps intelligent systems governable in real time, not after the incident.</div>
+              <div class="row">Every action can be evaluated, approved, blocked, escalated, or logged.</div>
+              <div class="row">The control layer sits between systems and execution.</div>
+            </div>
+          </div>
+
+          <div id="activity" class="tab-panel">
+            <div class="rows">
+              <div class="row">Blocked external pricing request from restricted workflow.</div>
+              <div class="row">Intercepted unauthorised client data access attempt.</div>
+              <div class="row">Forced approval gate on high-risk automation path.</div>
+            </div>
+          </div>
+
+          <div id="policytab" class="tab-panel">
+            <div class="rows">
+              <div class="row">No unauthorised external calls.</div>
+              <div class="row">Sensitive data requires explicit approval.</div>
+              <div class="row">High-risk workflows remain human-gated.</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="drawer" id="drawer">
+            <h3>Sentinel system</h3>
+            <p>Click a node to inspect what Sentinel is governing right now.</p>
+          </div>
+
+          <div class="signal-grid">
+            <div class="signal-card">
+              <small>Active agents</small>
+              <strong class="count" data-target="27">0</strong>
+              <span>Running under live supervision.</span>
+            </div>
+            <div class="signal-card">
+              <small>Blocked threats</small>
+              <strong class="count" data-target="18">0</strong>
+              <span>Stopped before execution.</span>
+            </div>
+            <div class="signal-card">
+              <small>Control score</small>
+              <strong class="count" data-target="96" data-suffix="%">0</strong>
+              <span>Measured against active policy posture.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="policy">
+      <div class="container">
+        <div class="eyebrow">Control model</div>
+        <h2>See. Govern. Enforce.</h2>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Visibility</h3>
+            <p>Observe how data, agents, models, and workflows move through your environment in real time.</p>
+          </div>
+          <div class="card">
+            <h3>Governance</h3>
+            <p>Apply policy-aware logic at the point of action, before risk becomes exposure.</p>
+          </div>
+          <div class="card">
+            <h3>Enforcement</h3>
+            <p>Approve, deny, escalate, or block system behaviour through a live control surface.</p>
+          </div>
+          <div class="card">
+            <h3>Traceability</h3>
+            <p>Maintain complete visibility over what happened, why it happened, and what was stopped.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="deploy">
+      <div class="container">
+        <div class="cta-panel">
+          <div class="eyebrow">Deployment view</div>
+          <h2>Sentinel belongs wherever intelligence is allowed to act.</h2>
+          <p>
+            Deploy across internal systems, data environments, agents, copilots, workflows, and external service boundaries.
+          </p>
+          <div class="cta-actions">
+            <a href="index.html" class="btn btn-primary">Back to Porthos</a>
+            <a href="#live" class="btn btn-secondary">Back to live system</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <h4>Sentinel</h4>
+          <a href="#live">Live system</a>
+          <a href="#policy">Control model</a>
+          <a href="#deploy">Deployment</a>
+        </div>
+        <div class="footer-col">
+          <h4>Porthos Labs</h4>
+          <a href="index.html">Homepage</a>
+          <a href="index.html#platform">Platform</a>
+          <a href="index.html#vision">Vision</a>
+        </div>
+        <div class="footer-col">
+          <h4>Capabilities</h4>
+          <a href="#">Visibility</a>
+          <a href="#">Governance</a>
+          <a href="#">Enforcement</a>
+        </div>
+        <div class="footer-col">
+          <h4>Status</h4>
+          <a href="#">Safe state</a>
+          <a href="#">Policy events</a>
+          <a href="#">Threat blocks</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    function animateCounts() {
+      const counters = document.querySelectorAll('.count');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'), 10);
+        const suffix = counter.getAttribute('data-suffix') || '';
+        let current = 0;
+        const increment = Math.max(1, Math.ceil(target / 40));
+
+        const updateCounter = () => {
+          current += increment;
+          if (current >= target) {
+            counter.textContent = target + suffix;
+          } else {
+            counter.textContent = current + suffix;
+            requestAnimationFrame(updateCounter);
+          }
+        };
+
+        updateCounter();
+      });
+    }
+
+    function showNode(title, text){
+      const drawer = document.getElementById('drawer');
+      drawer.innerHTML = `<h3>${title}</h3><p>${text}</p>`;
+    }
+
+    function switchTab(id, btn){
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function switchMiniTab(btn, id){
+      document.querySelectorAll('.mini-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      const map = {
+        overview: { title: 'Sentinel overview', text: 'Sentinel keeps intelligent systems governable in real time, not after the incident.' },
+        activity: { title: 'Live activity', text: 'Current policy events, blocked actions, and escalated workflows are monitored continuously.' },
+        policytab: { title: 'Policy layer', text: 'Rules sit directly inside execution paths so actions can be approved, denied, or halted instantly.' }
+      };
+      const drawer = document.getElementById('drawer');
+      drawer.innerHTML = `<h3>${map[id].title}</h3><p>${map[id].text}</p>`;
+    }
+
+    window.addEventListener('load', animateCounts);
+  </script>
+</body>
+</html>
